@@ -1,12 +1,14 @@
 # Passtis 
 ## Manage and synchronize your passwords anywhere securely
 
+![Passtis on MacOS](/docs/image/passtis_macos.png?raw=true "Passtis running on MacOS")
+
 ### Description:
 Passtis is a very very simple password manager (<2000 lines of JS), while trying to be secure simple and portable.
 
 It was created for a Meteor demo during a week-end project, so it is certainly not meant to be run in production anytime soon.
 
-My goal, thanks to Meteor and Electron, has been to run the same codebase on Windows, MacOs, Android, IOS, and on any browser. 
+My goal, thanks to Meteor and Electron, has been to run the same codebase on Windows, MacOS, Linux, Android, IOS, and on any browser. 
 
 Here is a list of Passtis features:
 
