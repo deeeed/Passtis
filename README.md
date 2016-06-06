@@ -19,6 +19,7 @@ Here is a list of Passtis features:
 - Native app on Windows and MacOS (using electron)
 
 ### TODO:
+- Unit Tests
 - Import/export passwords from the system (Keychains, Chrome, Firefox, ...) 
 - Shareable accounts (between users)
 - Mobile Friendly password generator (rule engine)
@@ -27,13 +28,64 @@ Here is a list of Passtis features:
 - keep track of password history
 - visual password strengh (which account has a weak / expired password?) 
 - Improve the translations
+- Migrate to React
+- Deployment/Configuration Documentation
 
 ### Usage
 
 
+```
+seyan:temp deeeed$ git clone https://github.com/deeeed/Passtis.git
+Cloning into 'Passtis'...
+remote: Counting objects: 117, done.
+remote: Compressing objects: 100% (104/104), done.
+remote: Total 117 (delta 4), reused 117 (delta 4), pack-reused 0
+Receiving objects: 100% (117/117), 101.61 KiB | 100.00 KiB/s, done.
+Resolving deltas: 100% (4/4), done.
+Checking connectivity... done.
+seyan:temp deeeed$ cd Passtis/src/
+seyan:src deeeed$ npm install
+/Users/deeeed/temp/Passtis/src
+...
+seyan:src deeeed$ meteor run
+[[[[[ ~/temp/Passtis/src ]]]]]
+
+=> Started proxy.
+=> Started MongoDB.
+I20160607-01:05:47.720(8)? init logger in msgfmt.js { name: 'msgfmt',
+I20160607-01:05:47.722(8)?   _events: { warn: [Function], info: [Function], error: [Function] } }
+I20160607-01:05:48.135(8)? 2016-06-07 01:05:47.587 info:  [msgfmt]  syncAll() (from mfAll.js) updating...
+I20160607-01:05:48.473(8)? 2016-06-07 01:05:48.470 info:  [msgfmt]  addNative() (from extracts.msgfmt~) updating...
+I20160607-01:05:48.905(8)? Starting publish in Filter Collections fc-filtered_accounts-results
+=> Started your app.
+
+=> App running at: http://localhost:3000/
+I20160607-01:05:49.738(8)? 2016-06-07 01:05:49.736 info:  [msgfmt:extracts]  14 string(s) added, 1 changed, and 1 marked as removed.
+I20160607-01:05:49.738(8)? 2016-06-07 01:05:49.736 info:  [msgfmt]  addNative() (from extracts.msgfmt~) updating...
+```
+
+You can also create native builds with electron:
+
+```
+seyan:electron_src deeeed$ ./build.sh
+Packaging app for platform linux ia32 using electron v0.36.2
+Packaging app for platform win32 ia32 using electron v0.36.2
+Packaging app for platform darwin x64 using electron v0.36.2
+Packaging app for platform linux x64 using electron v0.36.2
+Packaging app for platform win32 x64 using electron v0.36.2
+Wrote new apps to:
+/Users/deeeed/WebstormProjects/Passtis/PasstisApp/electron_src/PasstisApp-linux-ia32
+/Users/deeeed/WebstormProjects/Passtis/PasstisApp/electron_src/PasstisApp-win32-ia32
+/Users/deeeed/WebstormProjects/Passtis/PasstisApp/electron_src/PasstisApp-darwin-x64
+/Users/deeeed/WebstormProjects/Passtis/PasstisApp/electron_src/PasstisApp-linux-x64
+/Users/deeeed/WebstormProjects/Passtis/PasstisApp/electron_src/PasstisApp-win32-x64
+seyan:electron_src deeeed$ ls
+PasstisApp-darwin-x64 PasstisApp-linux-ia32 PasstisApp-linux-x64  PasstisApp-win32-ia32 PasstisApp-win32-x64  build.sh              index.js              node_modules          package.json          passtis.icns          passtis.png
+seyan:electron_src deeeed$ 
+```
 
 ### Why Passtis ?
-There are plenty of other more advanced Password Management Software, but I could never find one that fit all my requirements together:
+There are plenty of other more advanced Password Management Software, but I could not find one that fit all my requirements together:
 
 - Multi user per accounts (very useful for sysadmins)
 - Natively running on mobile and desktop
