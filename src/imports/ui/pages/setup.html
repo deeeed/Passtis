@@ -1,0 +1,47 @@
+<template name="setup">
+    <!-- Display passphrase modal -->
+    <div id="setupModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{mf 'setup.title' 'Passphrase'}}</h4>
+                </div>
+                <div class="modal-body">
+                    {{#unless syncReady}}
+                        <!--{{mf 'setup.loading' 'loading user information...'}}-->
+                        {{spinner (mf 'setup.loading' 'loading user information...')}}
+                    {{else}}
+                        {{#if isProcessing}}
+                            {{spinner processing}}
+                        {{else}}
+                            {{#if hasSetup}}
+                                <form id="PassphraseForm">
+                                    <fieldset>
+                                        {{#mf KEY='setup.info'}}
+                                            Passtis needs to keep your passphrase locally to manage your accounts.
+                                        {{/mf}}
+                                        <br/>
+                                        <input id="passphrase" type="password" value="" placeholder="{{mf 'setup.input' 'input your passphrase'}}" class="form-control"/>
+                                    </fieldset>
+                                    <div class="text-center">
+                                        <input type="submit" class="btn btn-primary" value="{{mf 'setup.save' 'Save'}}"/>
+                                    </div>
+                                </form>
+                            {{else}}
+                                <!--quickform-->
+                                {{#autoForm schema=schema id="setupPassphraseForm" template='bootstrap3' type="normal" validation="blur"}}
+                                    <fieldset>
+                                        {{> afQuickField name='passphrase'}}
+                                        {{> afQuickField name='passphraseConfirmation'}}
+                                    </fieldset>
+                                    <button type="submit" class="btn btn-success">{{mf 'setup.submit' 'Setup'}}</button>
+                                {{/autoForm}}
+                            {{/if}}
+                        {{/if}}
+                    {{/unless}}
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,76 @@
+<template name="accounts">
+    <div class="flexbox-subparent p-xxs">
+        <div class="flexbox-item border-bottom">
+            <div class="p-b-xs">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input id="search-box" type="text" placeholder="{{mf 'accounts.search' 'Search...'}}" value="{{fcFilterSearchable.criteria}}"
+                               class="form-control fc-search-field" data-fc-search-target="search-box">
+                        <button type="button" class="form-control-feedback form-control-action fc-search-trigger" data-fc-search-trigger="search-box">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <button id="starred_filter" class="btn btn-default fc-filter {{isActiveFilter 'starred'}}"
+                            data-fc-filter-field="starred" data-fc-filter-operator="$ne" data-fc-filter-value="false">
+                        <span class="fa {{#if isActive 'starred'}}fa-star{{else}}fa-star-o{{/if}} text-gold"></span> {{mf 'accounts.starred' 'Starred'}} <span class="badge">{{starredCount}}</span>
+                    </button>
+                    <button id="trash_filter" class="btn btn-default fc-filter {{isActiveFilter 'trashed'}}"
+                            data-fc-filter-field="trashed" data-fc-filter-value="true">
+                        <span class="fa fa-trash"></span> {{mf 'accounts.trash' 'Trash'}} <span class="badge">{{trashCount}}</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        {{#if isOnline}}
+            <a id="newaccount_btn" href="{{pathFor route='account_new'}}"
+               class="dim btn btn-primary btn-rounded">
+                <i class="fa fa-plus-square">&nbsp;{{mf 'accounts.new' 'New'}}</i>
+            </a>
+        {{/if}}
+
+        {{#if loading}}
+            <div>{{spinner (mf 'loading' 'loading...')}}</div>
+        {{else}}
+            <div class="flexbox-item flexbox-item-grow overflow-auto">
+                <div class="m-t-xs">
+                    {{#each fcResults}}
+                        <div class="col-md-12 no-padding no-margins">
+                            <div class="flexbox-parent account {{#if trashed}}trashed{{/if}}" tabindex="{{@index}}">
+                                <div class="flexbox-item">
+                                    <button class="btn btn-circle btn-star text-gold">
+                                        <i class="fa {{#if starred}}fa-star{{else}}fa-star-o{{/if}}">&nbsp;</i>
+                                    </button>
+                                </div>
+                                <div class="flexbox-item flexbox-item-grow text-center">
+                                    <a href="{{pathFor route='account_view'}}" class="account-name">
+                                        <span class="name">{{name}}</span>
+                                    </a>
+                                    {{#if trashed}}<span class="trash_warn">{{mf 'accounts.trashed' 'TRASHED'}}</span>{{/if}}
+                                </div>
+                                <div class="flexbox-item account-date">
+                                    <span class="small text-muted">{{formatDate createdAt 'L'}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+            <div class="text-center flexbox-item border-top">
+                <!-- numbered pager -->
+                <ul class="pagination">
+                    <li><a href="#" class="fc-pager-first">&lt;&lt;</a></li>
+                    <li><a href="#" class="fc-pager-previous">&lt;</a></li>
+                    {{#each fcPager.pages}}
+                        <li class="{{status}}"><a href="#" class="fc-pager-page"
+                                                  data-fc-pager-page="{{page}}">{{page}}</a></li>
+                    {{/each}}
+                    <li><a href="#" class="fc-pager-next">&gt;</a></li>
+                    <li><a href="#" class="fc-pager-last">&gt;&gt;</a></li>
+                </ul>
+                <!-- /numbered pager -->
+            </div>
+        {{/if}}
+    </div>
+</template>

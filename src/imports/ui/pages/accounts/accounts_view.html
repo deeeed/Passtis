@@ -1,0 +1,75 @@
+<template name="account_view">
+    <div class="flexbox-subparent p-xs">
+        <div class="flexbox-item">
+            {{mf 'account_view.name' 'Name:'}}
+            <button data-clipboard-text="{{name}}" class="btn btn-default clip">
+                <i class="fa fa-clipboard"></i> {{name}}
+            </button>
+        </div>
+        <div class="flexbox-item flexbox-item-grow overflow-auto">
+            {{#if isProcessing}}
+                {{spinner processing}}
+            {{else}}
+                {{#if hasErrors}}
+                    <strong>An error occured during decryption</strong>
+                    <div>{{secure}}</div>
+                {{else}}
+                    {{#with accountData}}
+                        <div>
+                            {{mf 'account_view.host' 'Host:'}} <a href='{{host}}' target="_blank">{{host}}</a>
+                        </div>
+                        <div>
+                            {{mf 'account_view.description' 'Description:'}}
+                            <pre class="pre">{{description}}</pre>
+                        </div>
+                        <table class="table table-responsive">
+                            <thead>
+                            <th>{{mf 'account_view.username' 'Username'}}</th>
+                            <th>{{mf 'account_view.password' 'Password'}}</th>
+                            </thead>
+                            <tbody>
+                            {{#each users}}
+                                <tr>
+                                    <td class="col-username">
+                                        <span data-clipboard-text="{{login}}"
+                                              class="btn btn-default clip">{{login}}</span>
+                                    </td>
+                                    <td class="col-password">
+                                        <div class="btn-group">
+                                                <span data-clipboard-text="{{password}}"
+                                                      class="btn btn-default clip">{{passwordValue @index}}</span>
+                                            <button class="btn btn-default js-view" data-index="{{@index}}"><i
+                                                    class="fa fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {{/each}}
+                            </tbody>
+                        </table>
+                    {{/with}}
+                {{/if}}
+            {{/if}}
+        </div>
+        <div class="flexbox-item text-center">
+            <div class="btn-group">
+                <button class="btn btn-primary js-back">{{mf 'account_view.back' 'Back'}}</button>
+                {{#if isOnline}}
+                    <button class="btn btn-primary js-remove">
+                        {{#if trashed}}
+                            {{mf 'account_view.delete' 'Delete Forever'}}
+                        {{else}}
+                            {{mf 'account_view.trash' 'Trash'}}
+                        {{/if}}
+                    </button>
+                    <a href="{{pathFor route='account_edit'}}"
+                       class="btn btn-primary">{{mf 'account_view.edit' 'Edit'}}</a>
+                {{else}}
+                    <a href="{{pathFor route='account_edit'}}"
+                       class="btn btn-primary">{{mf 'account_view.edit' 'Edit'}}</a>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</template>
+

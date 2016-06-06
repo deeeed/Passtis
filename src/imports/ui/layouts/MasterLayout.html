@@ -1,0 +1,42 @@
+<template name="MasterLayout">
+
+    <nav id="slideout-menu" class="navy-bg text-white" role="navigation">
+        {{>navigation}}
+    </nav>
+
+    <main id="main" class="flexbox-parent">
+        <div class="flexbox-item header text-white">
+            {{>topNavbar}}
+        </div>
+
+        <!-- {{mf 'cache_sync' 'Cache synchronization...'}} -->
+        <div class="flexbox-item fill-area flexbox-item-grow">
+            <div class="overflow-auto flexbox-item-grow white-bg position-relative">
+                {{#unless syncReady}}
+                    {{spinner (mf 'cache_sync' 'Cache synchronization...2')}}
+                {{else}}
+                    {{>yield}}
+                {{/unless}}
+            </div>
+        </div>
+        {{#unless isOnline}}
+            <!-- Connection tracking -->
+            <div id="page-status" class="navy-bg p-xs">
+                <div class="pull-left">
+                    <strong class="text-red"><i class="fa fa-warning">&nbsp;</i>{{mf 'offline' 'Offline'}}</strong>
+                </div>
+                <div class="text-center">
+                    <a href="#" class="js-connect btn btn-xs btn-warning">Connect now</a>
+                </div>
+                <div class="text-muted text-white clearfix">
+                    {{ostatus}}
+                </div>
+            </div>
+        {{/unless}}
+    </main>
+
+    {{> sAlert}}
+    {{> setup}}
+
+</template>
+

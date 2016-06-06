@@ -1,0 +1,18 @@
+<template name="AuthLayout">
+    <div style="display:block; width:100%;">
+        <div>
+            {{> yield}}
+        </div>
+        <div class="text-center">
+            <a href="#" class="js-lang" data-locale="en">
+                <img src="/flags/United-States.png" alt="US Flag"/> English
+            </a>
+            <a href="#" class="js-lang" data-locale="fr">
+                <img src="/flags/France.png" alt="France Flag"/> Français
+            </a>
+            <a href="#" class="js-lang" data-locale="zh">
+                <img src="/flags/China.png" alt="China Flag"/> 普通话
+            </a>
+        </div>
+    </div>
+</template>

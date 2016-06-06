@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "clipboard": "^1.5.10",
+    "crypto-js": "3.1.6",
+    "meteor-node-stubs": "^0.2.3",
+    "winston": "^1.0.2"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.3.4",
+    "postcss-safe-parser": "^1.0.7"
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {
+        "browsers": [
+          "last 2 versions"
+        ]
+      }
+    },
+    "parser": "postcss-safe-parser"
+  }
+}

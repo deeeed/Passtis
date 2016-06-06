@@ -1,0 +1,70 @@
+# Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+meteor-base             # Packages every Meteor app needs to have
+mobile-experience       # Packages for a great mobile UX
+mongo                   # The database Meteor supports right now
+blaze-html-templates    # Compile .html files into Meteor Blaze views
+session                 # Client-side reactive dictionary for your app
+jquery                  # Helpful client-side library
+tracker                 # Meteor's client-side reactive programming library
+
+es5-shim                # ECMAScript 5 compatibility for older browsers.
+ecmascript              # Enable ECMAScript2015+ syntax in app code
+reactive-var
+less
+service-configuration
+check
+blaze
+ejson
+standard-minifier-js
+logging
+
+aldeed:autoform
+
+aldeed:simple-schema
+chriswessels:hammer
+chriswessels:slideout
+twbs:bootstrap
+fortawesome:fontawesome
+mizzao:bootboxjs
+accounts-password
+#meteortoys:allthings
+natestrauser:animate-css
+natestrauser:select2
+stevezhu:lodash
+aldeed:collection2
+deeeed:filter-collections
+aldeed:template-extension
+
+# Routing and useraccounts
+iron:router
+useraccounts:iron-routing
+#kadira:flow-router
+#kadira:blaze-layout
+#useraccounts:flow-routing
+softwarerero:accounts-t9n
+useraccounts:bootstrap
+zimme:active-route
+
+#mbanting:cordova-accounts-resume
+ground:dbnew
+
+mycode:ismobile
+peerlibrary:xml2js
+juliancwirko:s-alert
+raix:eventemitter
+raix:eventddp
+raix:handlebar-helpers
+
+#18n
+msgfmt:core
+msgfmt:extract
+msgfmt:ui-dev-only
+tap:i18n
+momentjs:moment
+rzymek:moment-locale-fr
+rzymek:moment-locale-zh-cn

@@ -1,0 +1,15 @@
+<template name="navigation">
+    <div id="menu-header" class="text-center">
+        <img src="/keyeed-icon.png"/>
+        <h1 class="text-white">Passtis</h1>
+    </div>
+    <hr/>
+    <ul class="nav">
+        <li class="js-nav-menu {{isActiveRoute name='accounts'}}">
+            <a href="{{pathFor 'accounts'}}"><span class="fa fa-users"> {{mf 'navigation.accounts' 'Accounts'}}</span></a>
+        </li>
+        <li class="js-nav-menu {{isActiveRoute name='settings'}}">
+            <a href="{{pathFor 'settings'}}"><span class="fa fa-diamond"> {{mf 'navigation.settings' 'Settings'}}</span></a>
+        </li>
+    </ul>
+</template>

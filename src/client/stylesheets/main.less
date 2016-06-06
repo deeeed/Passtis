@@ -1,0 +1,128 @@
+@import "imports/variables.import.less";
+@import "imports/mixins.import.less";
+@import "imports/typography.import.less";
+@import "imports/base.import.less";
+@import "imports/pages.import.less";
+@import "imports/spinners.import.less";
+@import "imports/slideout.import.less";
+
+.flexbox-parent
+{
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  height: 100%;
+  justify-content: flex-start; /* align items in Main Axis */
+  align-items: stretch; /* align items in Cross Axis */
+  align-content: stretch; /* Extra space in Cross Axis */
+}
+
+.text-gold { color:gold; }
+.text-red { color: @red; }
+
+.beta-btn {
+  border:none;
+  color:@red;
+  background-color: #D1DABF;
+  font-family: 'Open Sans';
+  font-size:10px;
+  font-weight:600;
+  text-shadow:none;
+  cursor: pointer;
+}
+
+.flexbox-item
+{
+  padding: 0px;
+}
+.flexbox-item-grow
+{
+  flex: 1; /* same as flex: 1 1 auto; */
+}
+
+.fill-area
+{
+  display: flex;
+  flex-direction: row;
+
+  justify-content: flex-start; /* align items in Main Axis */
+  align-items: stretch; /* align items in Cross Axis */
+  align-content: stretch; /* Extra space in Cross Axis */
+
+}
+
+#main {
+  background-color: #6699ff;
+}
+
+#newaccount_btn {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  z-index: 100;
+}
+
+#page-status {
+  //position: fixed;
+  //padding: 15px;
+  //bottom: 20px;
+  //left:0px;
+  //right:0px;
+  //width: 200px;
+  //margin-left: auto;
+  //margin-right:auto;
+  //border-radius: 15px;
+  //opacity: 0.5;
+}
+
+// Same as flexbox-parent but with absolute position
+.flexbox-subparent:extend(.flexbox-parent) {
+  position: absolute;
+}
+
+.account {
+  flex-direction: row;
+  cursor: pointer;
+  padding: 10px 15px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  margin-bottom:10px;
+  height:60px;
+  overflow:auto;
+}
+.account:hover {
+  background-color: darken(#fff,5%);
+}
+.account:hover .account-name {
+  text-decoration: underline;
+}
+.account-date { width: 70px; }
+
+.btn-star {
+  background-color: transparent;
+  border: 1px solid gray;
+}
+.btn-star:hover { color:gold; };
+
+.form-control-action {
+  width: auto;
+  pointer-events: auto;
+  background-color:lightgrey;
+}
+
+//Adjust bootstrap pagination
+.pagination { margin: 10px 0; }
+
+.col-username {
+}
+.col-username .clip {
+  min-width: 100px;
+}
+.col-password div {
+  white-space: nowrap;
+}
+.col-password .clip {
+  width: 100px;
+  overflow: hidden;
+}

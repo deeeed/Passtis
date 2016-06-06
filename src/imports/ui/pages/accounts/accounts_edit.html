@@ -1,0 +1,25 @@
+<template name="account_edit">
+    <div class="flexbox-subparent p-xs">
+        {{#if isProcessing}}
+            {{spinner processing}}
+        {{else}}
+            <div class="flexbox-item flexbox-item-grow overflow-auto">
+                {{#autoForm schema=schema id="editAccountForm" type="normal" doc=accountData}}
+                    <fieldset>
+                        {{> afFieldInput name='_id' type='hidden'}}
+                        {{> afQuickField name='name'}}
+                        {{> afQuickField name='description'}}
+                        {{> afQuickField name='host'}}
+                        {{> afQuickField name='users'}}
+                    </fieldset>
+                {{/autoForm}}
+            </div>
+            <div class="text-center flexbox-item border-top">
+                <div class="btn-group p-xs">
+                    <a type="button" class="btn btn-primary js-back">{{mf 'account_edit.back' 'Back'}}</a>
+                    <button type="button" class="btn btn-primary js-submit">{{mf 'account_edit.save' 'Save'}}</button>
+                </div>
+            </div>
+        {{/if}}
+    </div>
+</template>
