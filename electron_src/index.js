@@ -1,8 +1,5 @@
-const app = require('app');
-const browser = require('browser-window');
-const menubar = require('menubar');
-const Tray = require('tray');
-const Menu = require('menu');
+const {app} = require('electron');
+const {Menu, Menubar, Tray, BrowserWindow} = require('electron');
 
 //var mb = menubar({
 //  index: './splash.html',
@@ -215,7 +212,7 @@ app.on('ready', function () {
     });
 
     //creates a new electron window
-    meteor_browser = new browser({
+    meteor_browser = new BrowserWindow({
         width: 800,
         center: true,
         title: 'Passtis Simple Password Manager',
