@@ -6,6 +6,7 @@ import KeyAccounts from '/imports/api/model/KeyAccounts.model.js';
 
 import '/imports/ui/layouts/MasterLayout.js';
 import '/imports/ui/layouts/AuthLayout.js';
+import '/imports/ui/layouts/BlankLayout.js';
 import '/imports/ui/pages/setup.js';
 import '/imports/ui/pages/settings.js';
 import '/imports/ui/pages/accounts/accounts.js';
@@ -14,6 +15,7 @@ import '/imports/ui/pages/accounts/accounts_edit.js';
 import '/imports/ui/pages/accounts/accounts_new.js';
 import '/imports/ui/pages/logout.js';
 import '/imports/ui/pages/loading.js';
+import '/imports/ui/helpers.js';
 
 /*
  * Create an iron-router plugin copy of ensureSignedIn disabling the 'onRun' function which would prevent
@@ -79,10 +81,14 @@ Router.plugin('isLogguedIn', {
 
 AppController = RouteController.extend({
     layoutTemplate: 'MasterLayout',
-    loadingTemplate: 'loading'
+    loadingTemplate: 'loading',
+    waitOn: function() {
+        // TODO re-enable after OAUTH integration
+        //return [Meteor.subscribe("country")];
+        return [];
+    }
 });
 
-// Define some routes
 Router.route('/', {
     name: 'accounts',
     template: 'accounts',
@@ -126,6 +132,9 @@ Router.route('/logout', {
     template: "logout"
 });
 
+/***********************************
+ * Accounts Template configuration
+ ***********************************/
 AccountsTemplates.configureRoute('signIn', {
     redirect: '/'
 });

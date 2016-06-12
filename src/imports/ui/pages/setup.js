@@ -5,6 +5,8 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
 
+import { modalReposition } from '/imports/ui/helpers.js';
+
 import SyncManager from '/imports/api/client/SyncManager.js';
 import SetupForm from '/imports/ui/forms/SetupForms.js';
 import LocalSession from '/imports/api/client/LocalSession.js';
@@ -33,7 +35,7 @@ Template.setup.helpers({
 });
 
 Template.setup.events({
-    "submit #PassphraseForm": function(evt, tpl) {
+    "submit #PassphraseForm"(evt, tpl) {
         evt.preventDefault();
 
         tpl.processing.set(mf("setup.check_passphrase", "Check passphrase validity..."));
@@ -51,6 +53,7 @@ Template.setup.events({
         tpl.processing.set(mf("setup.generate","Generate encryption key..."));
 
         setTimeout(function() {
+            //TODO allow configuration of the number of iterations (should be in user preferences)
             let key = CryptoJS.PBKDF2(passphrase, config.salt, {keySize: 512 / 32, iterations: 10}).toString();
             LocalSession.set("enckey", key);
         }, 100);
@@ -105,7 +108,7 @@ Template.setup.onCreated(function () {
             self.processing.set(null);
             sAlert.success(mf("setup.created","Your encryption key has been created."));
         }
-    });
+    }, true);
 });
 
 Template.setup.onRendered(function () {
@@ -131,6 +134,8 @@ Template.setup.onRendered(function () {
         }
     });
 
+    // Adjust modal position to the center of the screen.
+    modalReposition();
 });
 
 Template.setup.onDestroyed(function () {

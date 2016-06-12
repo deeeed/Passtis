@@ -1,3 +1,5 @@
+import { Meteor } from 'meteor/meteor';
+
 /*
  * This class is named KeyAccounts instead of Accounts to avoid confusion
  * with the Metoer Accounts classes.
@@ -66,7 +68,7 @@ AccountSchema.Account = new SimpleSchema({
 
 KeyAccounts.attachSchema(AccountSchema.Account, {replace: true});
 
-if (Meteor.isClient) {
+if (Meteor.isDevelopment && Meteor.isClient) {
     window.KeyAccounts = KeyAccounts;
 }
 

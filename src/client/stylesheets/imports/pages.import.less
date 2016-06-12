@@ -1,0 +1,43 @@
+
+.flexbox-parent
+{
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  height: 100%;
+  justify-content: flex-start; /* align items in Main Axis */
+  align-items: stretch; /* align items in Cross Axis */
+  align-content: stretch; /* Extra space in Cross Axis */
+}
+
+.flexbox-center { justify-content: center;  }
+.flexbox-nostrech { align-items: center; align-content:center; }
+
+.flexbox-item
+{
+  padding: 0px;
+}
+.flexbox-item-grow
+{
+  flex: 1; /* same as flex: 1 1 auto; */
+}
+
+.fill-area
+{
+  display: flex;
+  flex-direction: row;
+
+  justify-content: flex-start; /* align items in Main Axis */
+  align-items: stretch; /* align items in Cross Axis */
+  align-content: stretch; /* Extra space in Cross Axis */
+
+}
+
+// Same as flexbox-parent but with absolute position
+.flexbox-subparent:extend(.flexbox-parent) {
+  position: absolute;
+}
+
+
+.logout-box {text-align: center; color:@navy; background:white; }

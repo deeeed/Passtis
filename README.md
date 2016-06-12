@@ -1,30 +1,30 @@
 # Passtis 
 ## Manage and synchronize your passwords anywhere securely
 
-![Passtis on MacOS](/docs/image/passtis_macos.png?raw=true "Passtis running on MacOS")
+![Passtis on MacOS](/docs/images/passtis_macos.png?raw=true "Passtis running on MacOS")
 
 ### Description:
-Passtis is a very very simple password manager (<2000 lines of JS), while trying to be secure simple and portable.
+Passtis is an extremely simple password manager, while trying to be secure and portable.
 
-It was created for a Meteor demo during a week-end project, so it is certainly not meant to be run in production anytime soon.
+It has been created for a Meteor demo during a week-end project, so it is certainly not meant to be run in production anytime soon.
 
 My goal, thanks to Meteor and Electron, has been to run the same codebase on Windows, MacOS, Linux, Android, IOS, and on any browser. 
 
 Here is a list of Passtis features:
 
 - Manage passwords securely
-- Copy username / password to clipboard
 - Automatically synchronize your accounts between devices
 - Multiple User/Password per account (useful for system admin)
 - Can be self hosted on your own servers
 - Native app on Android and Iphone (using Cordova)
-- Native app on Windows and MacOS (using electron)
+- Native app on Windows, MacOS, and Linux (using electron)
 
 ### TODO:
 - Unit Tests
 - Import/export passwords from the system (Keychains, Chrome, Firefox, ...) 
-- Shareable accounts (between users)
-- Mobile Friendly password generator (rule engine)
+- Import from other Password Managers
+- Shareable accounts (between users / organizations)
+- Mobile Friendly password generator (pluggable rule engine)
 - Configurable password policy (expiration, etc..)
 - eslint, add es6 rules
 - keep track of password history
@@ -32,6 +32,7 @@ Here is a list of Passtis features:
 - Improve the translations
 - Migrate to React
 - Deployment/Configuration Documentation
+- Browser Plugin to synchronize the browser with Passtis
 
 ### Usage
 
@@ -93,36 +94,85 @@ There are plenty of other more advanced Password Management Software, but I coul
 - Natively running on mobile and desktop
 - Synchronized
 
-Additionally, I wanted to see how to migrate my current Password Manager that I created in 2009 using Java (client UI) and PHP (backend and account synchronization).
+Additionally, I wanted to see how to migrate my current Password Manager that I created in 2009 using Java (GUI) and PHP (backend and account synchronization).
 
-It’s not meant to replace any commercial solution (1Pass, LastPass, etc..), but I think it can become quite useful if you’re looking for a free secure native synchronized solution, open-source, and self-hosted. Plus I like to use my own stuff...
-Obviously this version is extremely basic, but with a few new features, it could become interesting...
+It’s not meant to replace any commercial solution (1Pass, LastPass, etc..), but I think it can become quite useful 
+if you’re looking for a free secure native synchronized solution, open-source, and self-hosted. 
+Plus I like to use my own stuff...
+Obviously this version is extremely basic, but with a few new features, it could become interesting.
 
 You can do whatever you want with the source code, and you are most welcome to submit pull requests! 
 
 ### How does it work ?
-Passtis has been designed to work offline first and uses LocalForage (ground:db) to store your information.
-When you start having a lot accounts (500+), the UI can become much slower (all the accounts are kept in memory). 
+Passtis has been designed to work offline and uses LocalForage (ground:db) to store your accounts.
+When you start having a lot of accounts (500+), the UI can become much slower (all the accounts are kept in memory). 
 I still have to think of a better way to handle all these accounts. I am thinking to create an hybrid storage mode to solve this problem. 
-it would use a "vault" (AES encrypted file) and could allow grouping of accounts, but I don't mind the slow UI for now.
+It would use a "vault" (AES encrypted file) and could allow grouping of accounts, but I don't mind the slow UI for now.
 
 
 ### Security
 Passtis should be deployed over ssl, which is very easy to setup with letsencrypt and meteor-up.  
-The data model for each accounts contains a clear and a secure section (host, description, [ login + password ]), which are **AES-256 encrypted**.
-In order to avoid brute force and dictionary attack, Your passphrase is not directly applied for encryption, Passtis uses **PBKDF2 for key stretching**.
-A random seed is associated to each user on registration, added to the passphrase through for key generation.
+The data model for each accounts contains a clear (data visible in the db) and a secure section (encrypted in the database).
+The secure section contains your {host, description, [ login + password ]} and is encrypted with AES-256.
 
-```CryptoJS.PBKDF2(passphrase, userseed, {keySize: 512 / 32, iterations: 10})``` 
+**Even if the database were compromised, it would be impossible for an attacker to access your login / password.**
 
-I changed the number of iterations from 1000 (recommended in CryptoJS) to 10, because it was putting too much stress on the phone when testing with Cordova.
-Feel free to adjust the value according to your security preferences ;)
+![Example of an account in MongoDB](/docs/images/account_dbmodel.png?raw=true "Example of an account in MongoDB")
+
+In order to avoid brute force and dictionary attacks, Your passphrase is not directly applied for encryption, 
+Passtis uses **PBKDF2 for key stretching**. A seed is randomly created and associated to each user upon registration,
+and then added to the passphrase during the key generation.
+
+Below is an example of key generation and encryption / decryption using CryptoJS:
+```
+var account = {name: "some_remote_server", users: [{login: "demo", password: "demo1234"}]};
+try {
+    // Key Generation
+    var passphrase = "user-defined value";
+    // seed is specific to each user and is created during registration
+    var seed = CryptoJS.lib.WordArray.random(128 / 8).toString();
+    // Generate an encryption/decryption key from the passphrase and the user seed
+    var key = CryptoJS.PBKDF2(passphrase, seed, {keySize: 512 / 32, iterations: 10}).toString();
+
+    // Encrypt our account
+    var secure = CryptoJS.AES.encrypt(EJSON.stringify(account), key).toString();
+
+    // Decrypt our secure data
+    var decrypted = CryptoJS.AES.decrypt(secure, key).toString();
+
+    // Back to our initial account
+    account = EJSON.parse(decrypted);
+} catch (err) {
+    console.error("oups...", err);
+}
+``` 
+
+For PBKDF2, I changed the number of iterations from 1000 (recommended in CryptoJS) to 10, because it was putting too much stress on the phone when testing with Cordova.
+Feel free to adjust the value according to your security preferences.
+Your encryption key is never stored on the servers, the encryption/decryption is done locally directly in your browser/webview.
+Once the key is generated, it is kept in the client memory as a javascript variable. 
 
 You can read more about password-based cryptography on RFC2898  http://www.ietf.org/rfc/rfc2898.txt .
 
-Your encryption key is never stored on the servers, the encryption/decryption is done locally directly in your browser/webview.
-**Even if the database were compromised, it would be impossible for an attacker to access your login / password.**
+_A few more things to investigate:_
 
-Once the key is generated, it is kept in the client memory as a javascript variable. Is it possible to dump the memory to access the key ?
-Is there any kind of protection that could be added ? 
++ Is it possible to dump the memory to access the key ?
++ Is there any kind of protection that could be added ? 
 
+### Architecture Choices / Problems
+
+##### How do you ensure all the accounts are available offline if the client looses its connection ?
+At the moment, a client is subscribing to the server to receive all the accounts on the initial connection.
+It's fine if there are only a few accounts, but will quickly become a problem if you have thousands of accounts.
+It would be much better to use a paginated subscription, but then there would be no way to ensure all the data are loaded for a mobile usage.
+
+##### How to change the passphrase ?
+Two possibilities, it could be done locally or on the server.
+
+1) Locally: It would be more secure because the key or passphrase would never go over the wire but extremely slow if a lot of accounts were to be migrated.
+
+2) Remotely: The problem is that the passphrase or the key would have to be transferred on the wire, it's definitely not as safe but would be much faster.    
+
+How to ensure atomicity of the operation (migration with new encryption key)?
+Maybe using the password history feature and rollback if one of the account didn't migrate successfully.
+Should have a versionning mechanism to each account for the rollback.

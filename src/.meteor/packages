@@ -30,14 +30,12 @@ chriswessels:hammer
 chriswessels:slideout
 twbs:bootstrap
 fortawesome:fontawesome
-mizzao:bootboxjs
 accounts-password
 #meteortoys:allthings
 natestrauser:animate-css
 natestrauser:select2
 stevezhu:lodash
 aldeed:collection2
-deeeed:filter-collections
 aldeed:template-extension
 
 # Routing and useraccounts
@@ -49,9 +47,11 @@ useraccounts:iron-routing
 softwarerero:accounts-t9n
 useraccounts:bootstrap
 zimme:active-route
+alanning:roles
 
 #mbanting:cordova-accounts-resume
-ground:dbnew
+deeeed:grounddb2
+deeeed:filter-collections
 
 mycode:ismobile
 peerlibrary:xml2js

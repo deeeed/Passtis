@@ -52,7 +52,7 @@ var template = [
                 label: 'Select All',
                 accelerator: 'CmdOrCtrl+A',
                 role: 'selectall'
-            },
+            }
         ]
     },
     {
@@ -224,7 +224,7 @@ app.on('ready', function () {
     });
 
     //  open up meteor root url
-    meteor_browser.loadURL("https://keyeedapp.siteed.net");
+    meteor_browser.loadURL("https://app.passtis.pw");
 
     meteor_browser.on("close", function (evt) {
         evt.preventDefault();

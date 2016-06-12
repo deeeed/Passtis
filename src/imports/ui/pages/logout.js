@@ -1,22 +1,28 @@
+import {Meteor} from 'meteor/meteor';
+import {Template} from 'meteor/templating';
+
 import './logout.html';
 
 Template.logout.helpers({
-    //add you helpers here
 });
 
 Template.logout.events({
-    //add your events here
 });
 
 Template.logout.onCreated(function () {
-    //add your statement here
 });
 
 Template.logout.onRendered(function () {
-    //add your statement here
+    // Wait for logout to complete and redirect to the login page.
+    this.autorun(()=>{
+        let user = Meteor.user();
+        if(!user) {
+            // Logout is completed once the user is not found
+            Router.go("accounts");
+        }
+    });
 });
 
 Template.logout.onDestroyed(function () {
-    //add your statement here
 });
 

@@ -1,5 +1,5 @@
 <template name="accounts">
-    <div class="flexbox-subparent p-xxs">
+    <div class="flexbox-subparent p-xxs animated fadeInRight">
         <div class="flexbox-item border-bottom">
             <div class="p-b-xs">
                 <div class="col-sm-6">
@@ -33,7 +33,7 @@
         {{#if loading}}
             <div>{{spinner (mf 'loading' 'loading...')}}</div>
         {{else}}
-            <div class="flexbox-item flexbox-item-grow overflow-auto">
+            <div class="flexbox-item flexbox-item-grow overflow-auto animated fadeIn">
                 <div class="m-t-xs">
                     {{#each fcResults}}
                         <div class="col-md-12 no-padding no-margins">

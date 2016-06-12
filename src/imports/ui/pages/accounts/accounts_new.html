@@ -1,5 +1,5 @@
 <template name="account_new">
-    <div class="flexbox-subparent p-xs">
+    <div class="flexbox-subparent p-xs animated fadeInRight">
         <div class="flexbox-item flexbox-item-grow overflow-auto">
             {{#autoForm schema=schema id="newAccountForm" type="normal"}}
                 {{#if isProcessing}}
@@ -15,12 +15,14 @@
                 {{/if}}
             {{/autoForm}}
         </div>
-        <div class="text-center flexbox-item border-top">
-            <div class="btn-group p-xs">
-                <a type="button" class="btn btn-primary js-back">{{mf 'account_new.back' 'Back'}}</a>
-                <button type="submit" class="btn btn-primary js-submit">{{mf 'account_new.save' 'Save'}}</button>
+        {{#if isOnline}}
+            <div class="text-center flexbox-item border-top">
+                <div class="btn-group p-xs">
+                    <a type="button" class="btn btn-primary js-back">{{mf 'account_new.back' 'Back'}}</a>
+                    <button type="submit" class="btn btn-primary js-submit">{{mf 'account_new.save' 'Save'}}</button>
+                </div>
             </div>
-        </div>
+        {{/if}}
     </div>
 </template>
 

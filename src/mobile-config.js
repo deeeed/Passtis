@@ -1,3 +1,6 @@
+/* globals App */
+/* eslint-disable quote-props */
+
 // This section sets up some basic app metadata,
 // the entire section is optional.
 App.info({
@@ -10,18 +13,18 @@ App.info({
 
 // Set up resources such as icons and launch screens.
 App.icons({
-  'android_mdpi': 'public/keyeed-icon-mdpi.png',
-  'android_hdpi': 'public/keyeed-icon-hdpi.png',
-  'android_xhdpi': 'public/keyeed-icon-xhdpi.png'
+  'android_mdpi': 'public/passtis-icon-mdpi.png',
+  'android_hdpi': 'public/passtis-icon-hdpi.png',
+  'android_xhdpi': 'public/passtis-icon-xhdpi.png'
 });
 
 App.launchScreens({
-  'android_mdpi_portrait': 'public/keyeed-splash.png',
-  'android_mdpi_landscape': 'public/keyeed-splash.png',
-  'android_hdpi_portrait': 'public/keyeed-splash.png',
-  'android_hdpi_landscape': 'public/keyeed-splash.png',
-  'android_xhdpi_portrait': 'public/keyeed-splash.png',
-  'android_xhdpi_landscape': 'public/keyeed-splash.png'
+  'android_mdpi_portrait': 'public/passtis-splash.png',
+  'android_mdpi_landscape': 'public/passtis-splash.png',
+  'android_hdpi_portrait': 'public/passtis-splash.png',
+  'android_hdpi_landscape': 'public/passtis-splash.png',
+  'android_xhdpi_portrait': 'public/passtis-splash.png',
+  'android_xhdpi_landscape': 'public/passtis-splash.png',
 });
 
 App.accessRule('*');
@@ -35,5 +38,5 @@ App.setPreference('Orientation', 'all', 'ios');
 
 // Configure cordova file plugin
 App.configurePlugin('cordova-plugin-file', {
-  iosPersistentFileLocation: 'Library'
+  iosPersistentFileLocation: 'Library',
 });

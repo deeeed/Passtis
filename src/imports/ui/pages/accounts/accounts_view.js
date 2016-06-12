@@ -3,6 +3,7 @@ import Clipboard   from 'clipboard';
 
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { $ } from 'meteor/jquery';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { ReactiveDict } from 'meteor/reactive-dict';
 
@@ -25,10 +26,19 @@ Template.account_view.onRendered(function () {
     // Otherwise it may display the password by default.
     clipboard = new Clipboard(".clip");
     clipboard.on("success", function (e) {
-        //console.info('Action:', e.action);
-        //console.info('Text:', e.text);
-        //console.info('Trigger:', e.trigger);
-        e.clearSelection();
+        // console.info('Action:', e.action);
+        // console.info('Text:', e.text);
+        // console.info('Trigger:', e.trigger);
+
+        // Display notification tooltip for 1sec to inform data is in clipboard
+        const targetNode = $(e.trigger);
+        targetNode.tooltip({
+            title: mf('clipboard_copy', 'Copied to clipboard'),
+            placement: 'bottom',
+            trigger: 'manual'
+        }).tooltip('show');
+        // Hide tooltip message after 1second
+        Meteor.setTimeout( () => targetNode.tooltip('hide') , 1000 );
     });
     clipboard.on('error', function (e) {
         console.error('Action:', e.action);
@@ -42,9 +52,6 @@ Template.account_view.onRendered(function () {
         // Autorun is used to detect changes on the Account
 
         const data = Template.currentData() || {};
-
-        // const account = EncryptionUtil.decrypt(Template.currentData());
-        // if
 
         if (!data.secure)
             return;

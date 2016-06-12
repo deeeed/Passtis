@@ -7,6 +7,11 @@ import {AutoForm} from 'meteor/aldeed:autoform';
 import RandomPassword from '/imports/api/RandomPassword.js';
 import './secureInput.html';
 
+/**
+ * Autoform input type for a user account
+ * - Toggable view to choose when to display the content of the field
+ * - Generate password button
+ */
 AutoForm.addInputType("secureInput", {
     template: "secure_input",
     valueOut: function () {
@@ -33,7 +38,6 @@ Template.secure_input.helpers({
     },
     getValue: function() {
         var type = Template.instance().inputType.get();
-        console.debug("getValue for "+type);
         return type == "text" ? this.value : "***********";
     },
     dsk: function dsk() {

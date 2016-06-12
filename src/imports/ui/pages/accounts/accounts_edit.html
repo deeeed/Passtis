@@ -14,12 +14,14 @@
                     </fieldset>
                 {{/autoForm}}
             </div>
-            <div class="text-center flexbox-item border-top">
-                <div class="btn-group p-xs">
-                    <a type="button" class="btn btn-primary js-back">{{mf 'account_edit.back' 'Back'}}</a>
-                    <button type="button" class="btn btn-primary js-submit">{{mf 'account_edit.save' 'Save'}}</button>
+            {{#if isOnline}}
+                <div class="text-center flexbox-item border-top">
+                    <div class="btn-group p-xs">
+                        <a type="button" class="btn btn-primary js-back">{{mf 'account_edit.back' 'Back'}}</a>
+                        <button type="button" class="btn btn-primary js-submit">{{mf 'account_edit.save' 'Save'}}</button>
+                    </div>
                 </div>
-            </div>
+            {{/if}}
         {{/if}}
     </div>
 </template>

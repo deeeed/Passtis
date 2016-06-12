@@ -1,7 +1,7 @@
 <template name="settings">
-    <div class="settings p-md">
+    <div class="settings p-md animated fadeInRight">
         <h1>Settings</h1>
-        <div class="text-center">
+        <div class="m-l-md">
             {{#if isOnline}}
                 {{#if isProcessing}}
                     {{spinner processing}}
@@ -10,16 +10,6 @@
                 {{/if}}
             {{/if}}
         </div>
-        <div class="p-md">
-            <a href="#" class="js-lang p-xs" data-locale="en">
-                <img src="/flags/United-States.png" alt="US Flag"/> English
-            </a>
-            <a href="#" class="js-lang p-xs" data-locale="fr">
-                <img src="/flags/France.png" alt="France Flag"/> Français
-            </a>
-            <a href="#" class="js-lang p-xs" data-locale="zh">
-                <img src="/flags/China.png" alt="China Flag"/> 普通话
-            </a>
-        </div>
+        {{> language_selection}}
     </div>
 </template>

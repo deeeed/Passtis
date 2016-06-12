@@ -1,3 +1,7 @@
 <template name="logout">
-    {{mf 'logout.loggingout' 'Logging out in progress...'}}
+    <div class="flexbox-parent flexbox-center navy-bg">
+        <div class="logout-box">
+            {{spinner (mf 'logout.loggingout' 'Logging out in progress...') }}
+        </div>
+    </div>
 </template>

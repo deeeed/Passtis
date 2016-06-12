@@ -6,21 +6,9 @@
 @import "imports/spinners.import.less";
 @import "imports/slideout.import.less";
 
-.flexbox-parent
-{
-  display: flex;
-  flex-direction: column;
-
-  width: 100%;
-  height: 100%;
-  justify-content: flex-start; /* align items in Main Axis */
-  align-items: stretch; /* align items in Cross Axis */
-  align-content: stretch; /* Extra space in Cross Axis */
-}
 
 .text-gold { color:gold; }
 .text-red { color: @red; }
-
 .beta-btn {
   border:none;
   color:@red;
@@ -32,28 +20,8 @@
   cursor: pointer;
 }
 
-.flexbox-item
-{
-  padding: 0px;
-}
-.flexbox-item-grow
-{
-  flex: 1; /* same as flex: 1 1 auto; */
-}
-
-.fill-area
-{
-  display: flex;
-  flex-direction: row;
-
-  justify-content: flex-start; /* align items in Main Axis */
-  align-items: stretch; /* align items in Cross Axis */
-  align-content: stretch; /* Extra space in Cross Axis */
-
-}
-
 #main {
-  background-color: #6699ff;
+  background-color: @navy;
 }
 
 #newaccount_btn {
@@ -76,10 +44,6 @@
   //opacity: 0.5;
 }
 
-// Same as flexbox-parent but with absolute position
-.flexbox-subparent:extend(.flexbox-parent) {
-  position: absolute;
-}
 
 .account {
   flex-direction: row;
@@ -126,3 +90,6 @@
   width: 100px;
   overflow: hidden;
 }
+
+.language-selection { padding: 10px; }
+.language-selection a.js-lang { padding:5px; }

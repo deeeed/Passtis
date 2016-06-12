@@ -8,11 +8,11 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import KeyAccounts from '/imports/api/model/KeyAccounts.model.js';
 
 /**
- * Synchronization Manager class (Singleton)
+ * Synchronization Manager class
  *
  * It allows to share the state of the synchronization for the app
  * - Are the publications ready ?
- *  "userData" + "KeyAccounts"
+ *  "userData" + "accounts.private"
  * - After the publications are ready, have they been grounded ?
  *
  */
@@ -23,17 +23,17 @@ class SyncManager {
         this.started = false;
         this.offlineUser = new Ground.Collection("users");
         this.offlineKeyAccounts = new Ground.Collection("accounts");
+        this.sub_accounts = null;
+        this.sub_users = null;
 
         // Observe remote changes on subscription
         this.offlineKeyAccounts.observeSource(KeyAccounts.find());
         this.offlineUser.observeSource(Meteor.users.find());
 
         console.info("Creating new SyncManager instance");
-
-        this._start();
     }
 
-    _start() {
+    start() {
         if(this.started) {
             console.error("[SyncManager] already started");
             return;
@@ -42,12 +42,12 @@ class SyncManager {
         this.started = true;
 
         // Begin global subscriptions, keep everything in cache.
-        this.sub1 = Meteor.subscribe("keyAccounts", () => {
+        this.sub_accounts = Meteor.subscribe("accounts.private", () => {
             // Caching all subscriptions data.
             const cursor = KeyAccounts.find();
             this.offlineKeyAccounts.keep(cursor);
         });
-        this.sub2 = Meteor.subscribe("userData", () => {
+        this.sub_users = Meteor.subscribe("userData", () => {
             // Caching all subscription data.
             const cursor = Meteor.users.find();
             this.offlineUser.keep(cursor);
@@ -85,6 +85,28 @@ class SyncManager {
     }
 
     /**
+     * Reset synchronization.
+     *
+     * - Stop all subscriptions
+     * - Cleanup ground:db cache
+     * - reset started flag
+     * 
+     */
+    reset() {
+        if(!this.started)
+            return;
+
+        // Stop subscriptions
+        this.sub_accounts.stop();
+        this.sub_users.stop();
+        // Clear offline cache
+        this.offlineKeyAccounts.clear();
+        this.offlineUser.clear();
+        // Reset started flag
+        this.started = false;
+    }
+
+    /**
      * Reactively check if the application is ready to be used.
      * It is ready if:
      * - either grounded collections have loaded. (Offline)
@@ -103,8 +125,8 @@ class SyncManager {
     };
 }
 
+// Only export one instance of the manager
 const manager = new SyncManager();
-//FIXME Remove from window scope, only for debugging.
 if(Meteor.isDevelopment) {
     window.manager = manager;
 }

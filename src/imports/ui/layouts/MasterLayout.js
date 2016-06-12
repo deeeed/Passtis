@@ -1,13 +1,13 @@
-import './MasterLayout.html';
-import './navigation.js';
-import './top-navbar.js';
-
-
 import {Meteor} from 'meteor/meteor';
 import {ReactiveVar} from 'meteor/reactive-var';
 import {ReactiveDict} from 'meteor/reactive-dict';
 import {Template} from 'meteor/templating';
 import {$} from 'meteor/jquery';
+
+import './MasterLayout.html';
+import '../components/navigation.js';
+import '../components/top_navbar.js';
+import '../components/language_selection.js';
 
 import SyncManager from '/imports/api/client/SyncManager.js';
 import ClientScope from '/imports/api/client/ClientScope.js';

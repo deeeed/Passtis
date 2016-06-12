@@ -1,3 +1,5 @@
+import { Meteor } from 'meteor/meteor';
+
 msgfmt.init('en', {
     // Send translations for all languages or current language
     sendPolicy: "current",
