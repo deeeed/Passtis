@@ -4,6 +4,8 @@ import {ReactiveDict} from 'meteor/reactive-dict';
 import {Template} from 'meteor/templating';
 import {$} from 'meteor/jquery';
 
+import isMobile from 'meteor/mycode:ismobile';
+
 import './MasterLayout.html';
 import '../components/navigation.js';
 import '../components/top_navbar.js';

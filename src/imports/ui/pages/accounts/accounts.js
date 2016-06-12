@@ -5,6 +5,8 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
 
+import isMobile from 'meteor/mycode:ismobile';
+
 import LocalSession from '/imports/api/client/LocalSession.js';
 import SyncManager from '/imports/api/client/SyncManager.js';
 import KeyAccounts from '/imports/api/model/KeyAccounts.model.js';

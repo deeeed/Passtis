@@ -28,11 +28,12 @@ Here is a list of Passtis features:
 - Configurable password policy (expiration, etc..)
 - eslint, add es6 rules
 - keep track of password history
-- visual password strengh (which account has a weak / expired password?) 
+- visual password strength (which account has a weak / expired password?) 
 - Improve the translations
 - Migrate to React
 - Deployment/Configuration Documentation
 - Browser Plugin to synchronize the browser with Passtis
+- Infinite scrolling instead of paginated view (on accounts page)
 
 ### Usage
 
@@ -175,4 +176,4 @@ Two possibilities, it could be done locally or on the server.
 
 How to ensure atomicity of the operation (migration with new encryption key)?
 Maybe using the password history feature and rollback if one of the account didn't migrate successfully.
-Should have a versionning mechanism to each account for the rollback.
+Should have a versioning mechanism to each account for the rollback.

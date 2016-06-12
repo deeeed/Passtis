@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { $ } from 'meteor/jquery';
+import {modalReposition} from '/imports/ui/helpers.js';
 
 Meteor.startup(function () {
 
@@ -19,11 +20,9 @@ Meteor.startup(function () {
     });
 
     // Reposition modal to the center when the window is resized
-    $(window).on('resize', function (evt) {
-        // console.debug("resize event", window.innerWidth, evt);
-        var width = window.innerWidth;
-
-        $('.modal:visible').each(modalReposition);
+    $(window).on('resize', (evt) => {
+        // $('.modal:visible').each();
+        modalReposition();
     });
 
 });
