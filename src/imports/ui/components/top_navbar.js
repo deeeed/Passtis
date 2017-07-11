@@ -13,12 +13,5 @@ Template.top_navbar.events({
         if(slideout) {
             slideout.toggle();
         }
-    },
-
-    'click .js-logout'(evt) {
-        evt.preventDefault();
-        Router.go("logout");
-        // Display logging out template
-        AccountsTemplates.logout();
     }
 });

@@ -8,5 +8,11 @@ Template.navigation.events({
         if(ClientScope.slideout!=null) {
             ClientScope.slideout.close();
         }
+    },
+    'click .js-logout'(evt) {
+        evt.preventDefault();
+        // Display logging out template
+        AccountsTemplates.logout();
+        Router.go("logout");
     }
 });

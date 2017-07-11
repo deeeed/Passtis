@@ -19,6 +19,7 @@ Meteor.methods({
     countryByIP: function (clientIp) {
         // log.debug(`countryByIp for ${clientIp}`);
 
+        check(clientIp, String);
         // Default to ddp connection ip address.
         let ip = clientIp || this.connection.clientAddress;
         const georesult = GeoIP.lookup(ip) || {};

@@ -21,7 +21,7 @@ Template.setup.helpers({
     hasSetup() {
         const user = Meteor.user() || {};
         const config = user.config || {};
-        return config.passphrase != null;
+        return (config.passphrase != null && config.passphrase.length>0);
     },
     isProcessing() {
         return Template.instance().processing.get() != null;

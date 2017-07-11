@@ -18,13 +18,14 @@ Here is a list of Passtis features:
 - Can be self hosted on your own servers
 - Native app on Android and Iphone (using Cordova)
 - Native app on Windows, MacOS, and Linux (using electron)
+- i18n
 
 ### TODO:
 - Unit Tests
 - Import/export passwords from the system (Keychains, Chrome, Firefox, ...) 
 - Import from other Password Managers
 - Shareable accounts (between users / organizations)
-- Mobile Friendly password generator (pluggable rule engine)
+- Mobile Friendly password generator (plugable rule engine)
 - Configurable password policy (expiration, etc..)
 - eslint, add es6 rules
 - keep track of password history

@@ -1,9 +1,9 @@
 import CryptoJS from 'crypto-js';
 
-import { Meteor } from 'meteor/meteor';
-import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
-import { ReactiveDict } from 'meteor/reactive-dict';
+import {Meteor} from 'meteor/meteor';
+import {Template} from 'meteor/templating';
+import {ReactiveVar} from 'meteor/reactive-var';
+import {ReactiveDict} from 'meteor/reactive-dict';
 
 import LocalSession from '/imports/api/client/LocalSession.js';
 import AccountForm from '/imports/ui/forms/AccountForms.js';
@@ -34,12 +34,12 @@ Template.account_edit.onCreated(function () {
 
         const enckey = LocalSession.get("enckey");
         if (enckey == null) {
-            processing.set(mf("accounts_edit.waiting","Waiting for encryption key"));
+            processing.set(mf("accounts_edit.waiting", "Waiting for encryption key"));
             return;
         }
 
         // Reset encryption status
-        processing.set(mf("accounts_edit.decrypting","Account decryption in progress..."));
+        processing.set(mf("accounts_edit.decrypting", "Account decryption in progress..."));
 
         var decrypted = CryptoJS.AES.decrypt(secure, enckey).toString(CryptoJS.enc.Utf8);
         decrypted = EJSON.parse(decrypted);
@@ -66,11 +66,11 @@ Template.account_edit.helpers({
 });
 
 Template.account_edit.events({
-    'click .js-back': function (evt,tpl) {
+    'click .js-back': function (evt, tpl) {
         evt.preventDefault();
         history.back();
     },
-    'click .js-submit': function(evt,tpl) {
+    'click .js-submit': function (evt, tpl) {
         evt.preventDefault();
         tpl.$("#editAccountForm").submit();
     }
@@ -89,43 +89,41 @@ AutoForm.addHooks("editAccountForm", {
         }
 
         // console.debug("Setting up account submit", insertDoc, updateDoc, self);
-        processing.set(mf("accounts_edit.encrypting","Encrypting account data..."));
+        processing.set(mf("accounts_edit.encrypting", "Encrypting account data..."));
 
-        setTimeout(function () {
-            const enckey = LocalSession.get("enckey");
+        const enckey = LocalSession.get("enckey");
 
-            // Users should be going through _.compact
-            // Otherwise autoform sometime has blank values in the middle of the array
-            var secure = EJSON.stringify({
-                host: insertDoc.host,
-                description: insertDoc.description,
-                users: _.compact(insertDoc.users)
-            });
+        // Users should be going through _.compact
+        // Otherwise autoform sometime has blank values in the middle of the array
+        let secure = EJSON.stringify({
+            host: insertDoc.host,
+            description: insertDoc.description,
+            users: _.compact(insertDoc.users)
+        });
 
-            // console.debug("encrypting now ", enckey, secure)
-            let encrypted = CryptoJS.AES.encrypt(secure, enckey).toString();
-            processing.set(mf("accounts_edit.saving","Saving data in progress..."));
+        // console.debug("encrypting now ", enckey, secure)
+        let encrypted = CryptoJS.AES.encrypt(secure, enckey).toString();
+        processing.set(mf("accounts_edit.saving", "Saving data in progress..."));
 
-            let updateQuery = {
-                $set: {
-                    name: insertDoc.name,
-                    secure: encrypted
-                }
+        let updateQuery = {
+            $set: {
+                name: insertDoc.name,
+                secure: encrypted
             }
-            // console.debug("updating account with ", updateQuery)
-            KeyAccounts.update({_id: data._id}, updateQuery , function (err, res) {
-                form.done(err, data._id);
-                processing.set(null);
-            });
-        }, 500);
+        }
+        // console.debug("updating account with ", updateQuery)
+        KeyAccounts.update({_id: data._id}, updateQuery, function (err, res) {
+            form.done(err, data._id);
+            processing.set(null);
+        });
     },
     onError: function (formType, error) {
         // console.debug("on error", formType, error);
-        sAlert.error(mf('accounts_edit.error','An error occured ...'));
+        sAlert.error(mf('accounts_edit.error', 'An error occured ...'));
     },
     onSuccess: function (formType, accountId) {
         // console.debug("edit success", formType,accountId);
-        sAlert.success(mf('accounts_edit.success',`Account has been updated.`));
+        sAlert.success(mf('accounts_edit.success', `Account has been updated.`));
         Router.go("account_view", {_id: accountId});
     }
 }, true /* Replace previous hook */);

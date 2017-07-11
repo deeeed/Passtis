@@ -5,7 +5,7 @@ client-only class used to manage offline collection synchronization.
 import { Meteor } from 'meteor/meteor';
 import { ReactiveVar } from 'meteor/reactive-var';
 
-import KeyAccounts from '/imports/api/model/KeyAccounts.model.js';
+import KeyAccounts from '../model/KeyAccounts.model.js';
 
 /**
  * Synchronization Manager class

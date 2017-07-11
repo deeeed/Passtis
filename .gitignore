@@ -23,3 +23,5 @@
 /electron_src/PasstisApp-linux-ia32/
 /electron_src/PasstisApp-darwin-x64/
 /electron_src/PasstisApp-win32-ia32/
+/src/server/extracts.msgfmt
+/build/

@@ -1,11 +1,11 @@
 import CryptoJS from 'crypto-js';
 import Clipboard   from 'clipboard';
 
-import { Meteor } from 'meteor/meteor';
-import { Template } from 'meteor/templating';
-import { $ } from 'meteor/jquery';
-import { ReactiveVar } from 'meteor/reactive-var';
-import { ReactiveDict } from 'meteor/reactive-dict';
+import {Meteor} from 'meteor/meteor';
+import {Template} from 'meteor/templating';
+import {$} from 'meteor/jquery';
+import {ReactiveVar} from 'meteor/reactive-var';
+import {ReactiveDict} from 'meteor/reactive-dict';
 
 import KeyAccounts from '/imports/api/model/KeyAccounts.model.js';
 import LocalSession from '/imports/api/client/LocalSession.js';
@@ -38,7 +38,7 @@ Template.account_view.onRendered(function () {
             trigger: 'manual'
         }).tooltip('show');
         // Hide tooltip message after 1second
-        Meteor.setTimeout( () => targetNode.tooltip('hide') , 1000 );
+        Meteor.setTimeout(() => targetNode.tooltip('hide'), 1000);
     });
     clipboard.on('error', function (e) {
         console.error('Action:', e.action);
@@ -65,20 +65,17 @@ Template.account_view.onRendered(function () {
         // Reset encryption status
         this.processing.set("Account decryption in progress...");
 
-        // Give  to the user to see something is happening
-        Meteor.setTimeout(() => {
-            try {
-                let decrypted = CryptoJS.AES.decrypt(data.secure, enckey).toString(CryptoJS.enc.Utf8);
-                decrypted = EJSON.parse(decrypted);
+        try {
+            let decrypted = CryptoJS.AES.decrypt(data.secure, enckey).toString(CryptoJS.enc.Utf8);
+            decrypted = EJSON.parse(decrypted);
 
-                this.accountData.set(decrypted);
-                this.decryptionError.set(null);
-                this.processing.set(null);
-            } catch(err) {
-                this.decryptionError.set(mf("account_view.error_decrypt", "An error occured"));
-                this.processing.set(null);
-            }
-        }, 1000);
+            this.accountData.set(decrypted);
+            this.decryptionError.set(null);
+            this.processing.set(null);
+        } catch (err) {
+            this.decryptionError.set(mf("account_view.error_decrypt", "An error occured"));
+            this.processing.set(null);
+        }
     });
 });
 
@@ -89,7 +86,7 @@ Template.account_view.helpers({
     isProcessing: function () {
         return Template.instance().processing.get() != null;
     },
-    hasErrors: function() {
+    hasErrors: function () {
         return Template.instance().decryptionError.get() != null;
     },
     processing: function () {
@@ -120,7 +117,7 @@ Template.account_view.events({
     'click .js-remove': function (evt) {
         evt.preventDefault();
         var self = this;
-        bootbox.confirm(mf("accounts_view.confirm_deletion","Do you really want to delete this account ?"), function (result) {
+        bootbox.confirm(mf("accounts_view.confirm_deletion", "Do you really want to delete this account ?"), function (result) {
             if (result == true) {
                 if (self.trashed) {
                     KeyAccounts.remove({_id: self._id});
@@ -131,7 +128,7 @@ Template.account_view.events({
                             sAlert.error(mf("account_view.error_remove", "An error occured"));
                             return;
                         }
-                        sAlert.success(mf("accounts_view.deleted","Account deleted."));
+                        sAlert.success(mf("accounts_view.deleted", "Account deleted."));
                         Router.go("accounts");
                     });
                 }

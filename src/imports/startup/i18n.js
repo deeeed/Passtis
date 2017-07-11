@@ -39,3 +39,5 @@ if (Meteor.isClient) {
         }
     });
 }
+
+
