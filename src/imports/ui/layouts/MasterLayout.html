@@ -13,7 +13,7 @@
         <div class="flexbox-item fill-area flexbox-item-grow">
             <div class="overflow-auto flexbox-item-grow white-bg position-relative">
                 {{#unless syncReady}}
-                    {{spinner (mf 'cache_sync' 'Cache synchronization...2')}}
+                    {{spinner (mf 'cache_sync' 'Cache synchronization...')}}
                 {{else}}
                     {{>yield}}
                 {{/unless}}

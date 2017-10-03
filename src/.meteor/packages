@@ -5,22 +5,22 @@
 # but you can also edit it by hand.
 
 meteor-base@1.1.0             # Packages every Meteor app needs to have
-mobile-experience@1.0.4       # Packages for a great mobile UX
-mongo@1.1.18                   # The database Meteor supports right now
+mobile-experience@1.0.5       # Packages for a great mobile UX
+mongo@1.2.2                   # The database Meteor supports right now
 blaze-html-templates    # Compile .html files into Meteor Blaze views
 session@1.1.7                 # Client-side reactive dictionary for your app
 jquery@1.11.10                  # Helpful client-side library
 tracker@1.1.3                 # Meteor's client-side reactive programming library
 
 es5-shim@4.6.15                # ECMAScript 5 compatibility for older browsers.
-ecmascript@0.8.0              # Enable ECMAScript2015+ syntax in app code
+ecmascript@0.8.3              # Enable ECMAScript2015+ syntax in app code
 reactive-var@1.0.11
 less@2.7.9
 service-configuration@1.0.11
 check@1.2.5
 blaze
-ejson@1.0.13
-standard-minifier-js@2.1.0
+ejson@1.0.14
+standard-minifier-js@2.1.2
 logging@1.1.17
 
 aldeed:autoform
@@ -30,7 +30,7 @@ chriswessels:hammer
 chriswessels:slideout
 twbs:bootstrap
 fortawesome:fontawesome
-accounts-password@1.3.6
+accounts-password@1.4.0
 #meteortoys:allthings
 natestrauser:animate-css
 natestrauser:select2
@@ -67,6 +67,6 @@ msgfmt:ui-dev-only
 momentjs:moment
 rzymek:moment-locale-fr
 rzymek:moment-locale-zh-cn
-shell-server
-dynamic-import
+shell-server@0.2.4
+dynamic-import@0.1.3
 tap:i18n

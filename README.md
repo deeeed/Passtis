@@ -145,7 +145,7 @@ try {
     // Back to our initial account
     account = EJSON.parse(decrypted);
 } catch (err) {
-    console.error("oups...", err);
+    console.error("oops...", err);
 }
 ``` 
 
