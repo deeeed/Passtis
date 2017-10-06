@@ -23,31 +23,9 @@
                                 {{mf 'account_view.description' 'Description:'}}
                                 <pre class="pre">{{description}}</pre>
                             </div>
-                            <table class="table table-responsive">
-                                <thead>
-                                <th>{{mf 'account_view.username' 'Username'}}</th>
-                                <th>{{mf 'account_view.password' 'Password'}}</th>
-                                </thead>
-                                <tbody>
-                                {{#each users}}
-                                    <tr>
-                                        <td class="col-username">
-                                        <span data-clipboard-text="{{login}}"
-                                              class="btn btn-default clip">{{login}}</span>
-                                        </td>
-                                        <td class="col-password">
-                                            <div class="btn-group">
-                                                <span data-clipboard-text="{{password}}"
-                                                      class="btn btn-default clip">{{passwordValue @index}}</span>
-                                                <button class="btn btn-default js-view" data-index="{{@index}}"><i
-                                                        class="fa fa-eye"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                {{/each}}
-                                </tbody>
-                            </table>
+                            {{#each users}}
+                                {{>userview}}
+                            {{/each}}
                         </div>
                     {{/with}}
                 {{/if}}

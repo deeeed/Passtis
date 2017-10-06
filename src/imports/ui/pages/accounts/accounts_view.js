@@ -10,6 +10,7 @@ import {ReactiveDict} from 'meteor/reactive-dict';
 import KeyAccounts from '/imports/api/model/KeyAccounts.model.js';
 import LocalSession from '/imports/api/client/LocalSession.js';
 import './accounts_view.html';
+import './userview'
 
 // ######################################################################
 let clipboard = null;
@@ -91,29 +92,10 @@ Template.account_view.helpers({
     },
     processing: function () {
         return Template.instance().processing.get();
-    },
-    passwordValue: function (userIndex) {
-        let index = Template.instance().viewUser.get();
-        return (index == userIndex) ? this.password : "***************";
     }
 });
 
 Template.account_view.events({
-    "click .js-view": function (evt, tpl) {
-        evt.preventDefault();
-
-        var userIndex = tpl.$(evt.currentTarget).data("index");
-        var previousIndex = tpl.viewUser.get();
-
-        // console.debug("showing user", this, userIndex);
-        if (userIndex === previousIndex) {
-            // Disable current view if click on the same user
-            tpl.viewUser.set(null);
-        } else {
-            tpl.viewUser.set(userIndex);
-        }
-
-    },
     'click .js-remove': function (evt) {
         evt.preventDefault();
         var self = this;

@@ -1,0 +1,21 @@
+<template name="userview">
+    <div class="userview">
+        <div class="field-label">
+            {{mf 'account_view.username' 'Username'}}
+        </div>
+        <div class="field field-username">
+            <div data-clipboard-text="{{login}}"
+                 class="btn btn-default full-width field-view clip">{{login}}</div>
+        </div>
+        <div class="field-label">
+            {{mf 'account_view.password' 'Password'}}
+        </div>
+        <div class="field field-password">
+            <div data-clipboard-text="{{password}}"
+                 class="btn btn-default clip field-view">{{passwordValue}}</div>
+            <button class="btn btn-default js-view">
+                <i class="fa {{eyeIcon}}"></i>
+            </button>
+        </div>
+    </div>
+</template>

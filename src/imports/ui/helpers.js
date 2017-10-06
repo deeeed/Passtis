@@ -83,7 +83,26 @@ const modalReposition = function() {
  * @returns {boolean} DDP connection status.
  */
 const isOnline = function() {
-  return Meteor.status().connected;
+    let status = Meteor.status();
+    let online = status.connected;
+    if(!online) {
+        if(Meteor.isCordova) {
+            // Show offline only after 2nd connection attempt to avoid
+            // disconnection message when app looses focus
+            online = status.retryCount < 2;
+        }
+    }
+
+    return online;
 }
 
-export {modalReposition, isOnline, getSpinner};
+/**
+ * Check if the DDP connection is connecting
+ *
+ * @return {boolean}
+ */
+const isConnecting = function() {
+    return Meteor.status().status === "connecting";
+}
+
+export {modalReposition, isOnline, isConnecting, getSpinner};

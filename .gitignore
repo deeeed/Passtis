@@ -16,12 +16,7 @@
 
 /electron_src/node_modules
 /src/node_modules
-/src/packages
-/electron_src/npm-debug.log
-/electron_src/PasstisApp-linux-x64/
-/electron_src/PasstisApp-win32-x64/
-/electron_src/PasstisApp-linux-ia32/
-/electron_src/PasstisApp-darwin-x64/
-/electron_src/PasstisApp-win32-ia32/
+/src/packages/
 /src/server/extracts.msgfmt
 /build/
+/passtis-electron/dist/
