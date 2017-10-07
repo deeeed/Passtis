@@ -4,8 +4,8 @@ APP="/Users/deeeed/WebstormProjects/Passtis/PasstisApp"
 cd ${APP}
 
 
-ver=$(git describe --abbrev=0)
-complete=$(git describe)
+ver=$(git describe --always --abbrev=0)
+complete=$(git describe --always)
 branch=$(git rev-parse --abbrev-ref HEAD)
 commit=$(git rev-parse HEAD)
 timestamp=$(git log -1 --date=short --pretty=format:%cd)
