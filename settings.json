@@ -1,8 +1,13 @@
 {
   "public": {
+    "version": "0.2.1",
     "msgfmt": {
       "native": "en",
-      "locales": ["en", "fr", "zh"]
+      "locales": [
+        "en",
+        "fr",
+        "zh"
+      ]
     }
   }
 }
