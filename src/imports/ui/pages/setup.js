@@ -16,7 +16,8 @@ LocalSession.setDefault("enckey", null);
 
 Template.setup.helpers({
     syncReady() {
-        return SyncManager.isReady();
+        let hasConfig = lodash.has(Meteor.user(), "config");
+        return SyncManager.isReady() && hasConfig;
     },
     hasSetup() {
         const user = Meteor.user() || {};

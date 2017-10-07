@@ -1,6 +1,7 @@
-import { Meteor } from 'meteor/meteor';
-import { $ } from 'meteor/jquery';
+import {Meteor} from 'meteor/meteor';
+import $ from 'jquery';
 import {modalReposition} from '/imports/ui/helpers.js';
+
 
 Meteor.startup(function () {
 

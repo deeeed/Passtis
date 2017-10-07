@@ -1,20 +1,39 @@
 {
   "name": "Passtis",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A Simple Password Manager",
   "author": "Arthur Breton",
   "license": "MIT",
   "scripts": {
     "dev": "electron-webpack dev",
     "compile": "electron-webpack",
-    "dist": "yarn compile && electron-builder",
+    "dist": "electron-builder",
     "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null"
   },
   "build": {
-    "appId":"net.siteed.PasstisMac",
+    "appId": "net.siteed.PasstisMac",
     "mac": {
       "category": "public.app-category.utilities",
-      "target": "pkg"
+      "target": [
+        "pkg",
+        "dmg",
+        "mas"
+      ],
+      "entitlements": "assets/entitlements.mac.plist",
+      "type": "distribution",
+      "icon": "assets/icon.icns"
+    },
+    "mas": {
+      "entitlements": "assets/entitlements.mas.plist",
+      "type": "distribution",
+      "category": "public.app-category.utilities"
+    },
+    "directories": {
+      "buildResources": "assets"
+    }
+  },
+  "electronWebpack": {
+    "main": {
     }
   },
   "dependencies": {
@@ -23,7 +42,9 @@
   "devDependencies": {
     "electron": "1.7.8",
     "electron-builder": "^19.34.1",
-    "electron-webpack": "^1.7.0",
-    "webpack": "^3.6.0"
+    "electron-webpack": "1.8.0",
+    "webpack": "^3.6.0",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.5"
   }
 }

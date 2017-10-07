@@ -118,8 +118,8 @@ class SyncManager {
         const user = Meteor.user() || {};
         const config = user.config || null;
         //FIXME temporarily disable, possible bug here
-        // const offlineReady = this.offlineKeyAccounts.find().count()>0 && config!=null;
-        const offlineReady = false;
+        const offlineReady = this.offlineKeyAccounts.find().count()>0 && config!=null;
+        // const offlineReady = false;
         const onlineReady =this.userDataReady.get() && this.keyAccountsReady.get()
         return offlineReady || onlineReady;
     };

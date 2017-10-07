@@ -26,10 +26,7 @@ logging@1.1.17
 aldeed:autoform
 
 aldeed:simple-schema
-chriswessels:hammer
 chriswessels:slideout
-twbs:bootstrap
-fortawesome:fontawesome
 accounts-password@1.4.0
 #meteortoys:allthings
 natestrauser:animate-css
@@ -48,6 +45,7 @@ softwarerero:accounts-t9n
 useraccounts:bootstrap
 zimme:active-route
 alanning:roles
+fortawesome:fontawesome
 
 #mbanting:cordova-accounts-resume
 deeeed:grounddb2

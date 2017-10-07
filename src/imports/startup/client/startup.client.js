@@ -1,3 +1,5 @@
+import 'bootstrap'
+
 import './config.js';
 // useraccounts-config HAS to come before the routes.
 import './useraccounts-config.js';

@@ -85,7 +85,7 @@ Wrote new apps to:
 /Users/deeeed/WebstormProjects/Passtis/PasstisApp/electron_src/PasstisApp-linux-x64
 /Users/deeeed/WebstormProjects/Passtis/PasstisApp/electron_src/PasstisApp-win32-x64
 seyan:electron_src deeeed$ ls
-PasstisApp-darwin-x64 PasstisApp-linux-ia32 PasstisApp-linux-x64  PasstisApp-win32-ia32 PasstisApp-win32-x64  build.sh              index.js              node_modules          package.json          passtis.icns          passtis.png
+PasstisApp-darwin-x64 PasstisApp-linux-ia32 PasstisApp-linux-x64  PasstisApp-win32-ia32 PasstisApp-win32-x64  build.sh              startup.client.js              node_modules          package.json          passtis.icns          passtis.png
 seyan:electron_src deeeed$ 
 ```
 

@@ -3,10 +3,11 @@ import Clipboard   from 'clipboard';
 
 import {Meteor} from 'meteor/meteor';
 import {Template} from 'meteor/templating';
-import {$} from 'meteor/jquery';
+import $ from 'jquery';
 import {ReactiveVar} from 'meteor/reactive-var';
 import {ReactiveDict} from 'meteor/reactive-dict';
 
+import bootbox from 'bootbox';
 import KeyAccounts from '/imports/api/model/KeyAccounts.model.js';
 import LocalSession from '/imports/api/client/LocalSession.js';
 import './accounts_view.html';
