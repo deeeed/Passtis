@@ -10,7 +10,7 @@ App.info({
     author: 'Arthur Breton',
     email: 'abreton@siteed.net',
     website: 'https://www.passtis.pw',
-    version: '0.2.5'
+    version: '0.2.6'
 });
 
 // Set up resources such as icons and launch screens.

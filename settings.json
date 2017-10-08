@@ -1,6 +1,6 @@
 {
   "public": {
-    "version": "0.2.5",
+    "version": "0.2.6",
     "msgfmt": {
       "native": "en",
       "locales": [
