@@ -1,5 +1,5 @@
-import log from '/imports/util/loggers.js';
 import { Meteor } from 'meteor/meteor';
+import {logger as log} from "../../util/loggers";
 
 import GeoIP from 'geoip-lite-country';
 
@@ -17,7 +17,7 @@ Meteor.methods({
      * @returns {String} georesult.country - Country code of the ip
      */
     countryByIP: function (clientIp) {
-        // log.debug(`countryByIp for ${clientIp}`);
+        // logger.debug(`countryByIp for ${clientIp}`);
 
         check(clientIp, String);
         // Default to ddp connection ip address.
@@ -26,5 +26,10 @@ Meteor.methods({
         // Keep a copy of the ip with the georesult object.
         georesult.ip = ip;
         return georesult;
+    },
+    "user.config"({passphrase,pincode}={}) {
+        check(passphrase, String);
+
+        //TODO
     }
 });

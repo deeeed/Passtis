@@ -1,6 +1,6 @@
 import {Meteor} from 'meteor/meteor';
-import KeyAccounts  from '/imports/api/model/KeyAccounts.model.js';
-import log from '/imports/util/loggers.js';
+import {KeyAccounts} from "../model/KeyAccounts.model";
+import {logger as log} from "../../util/loggers";
 
 Meteor.publish("accounts.private", function () {
     var cursor = KeyAccounts.find({owner: this.userId});
@@ -43,7 +43,7 @@ Meteor.publish('userData', function () {
  * not available from within China.
  */
 Meteor.publish('country', function () {
-    if(this.connection == null) {
+    if (this.connection == null) {
         this.ready();
     }
     var clientIP = this.connection.clientAddress;

@@ -1,21 +1,22 @@
 import {Router, RouteController} from 'meteor/iron:router';
-import { AccountsTemplates } from 'meteor/useraccounts:core';
-import { Meteor } from 'meteor/meteor';
+import {AccountsTemplates} from 'meteor/useraccounts:core';
+import {Meteor} from 'meteor/meteor';
 
-import KeyAccounts from '/imports/api/model/KeyAccounts.model.js';
+import {KeyAccounts} from "../../api/model/KeyAccounts.model";
 
-import '/imports/ui/layouts/MasterLayout.js';
-import '/imports/ui/layouts/AuthLayout.js';
-import '/imports/ui/layouts/BlankLayout.js';
-import '/imports/ui/pages/setup.js';
-import '/imports/ui/pages/settings.js';
-import '/imports/ui/pages/accounts/accounts.js';
-import '/imports/ui/pages/accounts/accounts_view.js';
-import '/imports/ui/pages/accounts/accounts_edit.js';
-import '/imports/ui/pages/accounts/accounts_new.js';
-import '/imports/ui/pages/logout.js';
-import '/imports/ui/pages/loading.js';
-import '/imports/ui/helpers.js';
+import '../../ui/layouts/MasterLayout.js';
+import '../../ui/layouts/AuthLayout.js';
+import '../../ui/layouts/BlankLayout.js';
+import '../../ui/pages/setup.js';
+import '../../ui/pages/debug.js';
+import '../../ui/pages/settings.js';
+import '../../ui/pages/accounts/accounts.js';
+import '../../ui/pages/accounts/accounts_view.js';
+import '../../ui/pages/accounts/accounts_edit.js';
+import '../../ui/pages/accounts/accounts_new.js';
+import '../../ui/pages/logout.js';
+import '../../ui/pages/loading.js';
+import '../../ui/helpers.js';
 
 /*
  * Create an iron-router plugin copy of ensureSignedIn disabling the 'onRun' function which would prevent
@@ -33,12 +34,12 @@ Iron.Router.plugins.isLogguedIn = function (router, options) {
     // }, options);
 
     router.onBeforeAction(
-        function() {
+        function () {
             if (!Meteor.userId()) {
                 Tracker.nonreactive(function () {
                     AccountsTemplates.setPrevPath(Router.current().url);
                 });
-                AccountsTemplates.setState(AccountsTemplates.options.defaultState, function(){
+                AccountsTemplates.setState(AccountsTemplates.options.defaultState, function () {
                     var err = AccountsTemplates.texts.errors.mustBeLoggedIn;
                     AccountsTemplates.state.form.set('error', [err]);
                 });
@@ -66,7 +67,7 @@ Iron.Router.plugins.isLogguedIn = function (router, options) {
         options
     );
 
-    router.onStop(function(){
+    router.onStop(function () {
         AccountsTemplates.clearError();
     });
 };
@@ -82,7 +83,7 @@ Router.plugin('isLogguedIn', {
 AppController = RouteController.extend({
     layoutTemplate: 'MasterLayout',
     loadingTemplate: 'loading',
-    waitOn: function() {
+    waitOn: function () {
         // TODO re-enable after OAUTH integration
         //return [Meteor.subscribe("country")];
         return [];
@@ -92,6 +93,12 @@ AppController = RouteController.extend({
 Router.route('/', {
     name: 'accounts',
     template: 'accounts',
+    controller: 'AppController'
+});
+
+Router.route('/Debug', {
+    name: 'debug',
+    template: 'debug',
     controller: 'AppController'
 });
 

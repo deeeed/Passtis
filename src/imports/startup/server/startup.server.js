@@ -1,10 +1,11 @@
 import './authorizations.js';
 import '../i18n.js';
-import '/imports/api/server/publish.server.js';
-import '/imports/api/server/methods.server.js';
-import '/imports/api/server/userhooks.server.js';
+import '../../api/server/publish.server.js';
+import '../../api/server/methods.server.js';
+import '../../api/server/userhooks.server.js';
 import { Meteor } from 'meteor/meteor';
 import { WebApp } from 'meteor/webapp';
+import {logger as log} from "../../util/loggers";
 
 Meteor.startup(() => {
     // Initiate demo account

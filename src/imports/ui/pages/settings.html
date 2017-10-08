@@ -1,18 +1,6 @@
 <template name="settings">
     <div class="settings p-md animated fadeInRight">
         <h1>Settings</h1>
-        <div class="m-l-md">
-            {{#if isOnline}}
-                {{#if isProcessing}}
-                    {{spinner processing}}
-                {{else}}
-                    <button class="btn btn-danger js-disconnect">Go Offline</button>
-                {{/if}}
-            {{/if}}
-        </div>
         {{> language_selection}}
-        <div>
-            <button class="btn btn-default js-electron ">Test electron</button>
-        </div>
     </div>
 </template>

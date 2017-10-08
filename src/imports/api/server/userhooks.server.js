@@ -1,5 +1,5 @@
 import CryptoJS from 'crypto-js';
-import log from '/imports/util/loggers.js';
+import {logger as log} from "../../util/loggers";
 
 import { Meteor } from 'meteor/meteor';
 

@@ -2,7 +2,7 @@
 //TODO change to es6 class
 
 // Public: Constructor
-export default RandomPassword = function RandomPassword() {
+export const  RandomPassword = function RandomPassword() {
     this.chrLower="abcdefghjkmnpqrst";
     this.chrUpper="ABCDEFGHJKMNPQRST";
     this.chrNumbers="23456789";

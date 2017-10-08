@@ -1,5 +1,5 @@
 import './top_navbar.html';
-import ClientScope from '/imports/api/client/ClientScope.js';
+import {ClientScope} from "../../api/client/ClientScope";
 
 Template.top_navbar.onRendered(function(){
 });

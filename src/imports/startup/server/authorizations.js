@@ -1,4 +1,4 @@
-import KeyAccounts  from '/imports/api/model/KeyAccounts.model.js';
+import {KeyAccounts} from "../../api/model/KeyAccounts.model";
 
 KeyAccounts.allow({
     insert: function (userId, doc) {

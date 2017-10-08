@@ -9,12 +9,42 @@
  *
  */
 
-import { ReactiveDict } from 'meteor/reactive-dict';
+import {ReactiveDict} from 'meteor/reactive-dict';
 
 // ReactiveDict needs to be called with an argument to persist across hotcode push.
-const localSession = new ReactiveDict('persist');
-localSession.setDefault("enckey", null);
+const dict = new ReactiveDict('persist');
 
-// FIXME remove, allow to modifiy the key from the console
-window.session = localSession;
-export default localSession;
+// Add an abstraction layer for the session object to allow changing the persistance layer.
+export const localSession = {
+    set(key, value, persist=false) {
+        // console.debug("setting local session item", key, value);
+        if(persist) {
+            window.sessionStorage.setItem(key, value);
+        }
+
+        dict.set(key, value);
+    },
+    /**
+     * Must be reactive
+     *
+     * @param key
+     */
+    get(key) {
+        // Use dict to make it reactive
+        let value = dict.get(key);
+        if(!value) {
+            // Also try to find it from session storage.
+            value = sessionStorage.getItem(key);
+        }
+        return value;
+    },
+    equals(key, value) {
+        return this.get(key) == value;
+    }
+};
+
+if (Meteor.isDevelopment) {
+    // FIXME remove, allow to modifiy the key from the console
+    window.localSession = localSession;
+}
+

@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import LocalSession from '/imports/api/client/LocalSession.js';
+import {localSession} from "../../api/client/LocalSession";
 
 Meteor.startup(function() {
   var hidden = "hidden";
@@ -35,7 +35,7 @@ Meteor.startup(function() {
       browser = this[hidden] ? "hidden" : "visible";
 
     //console.debug("browser is "+browser);
-    LocalSession.set("focus",browser);
+    localSession.set("focus",browser);
   }
 
   // set the initial state (but only if browser supports the Page Visibility API)

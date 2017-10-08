@@ -1,0 +1,14 @@
+<template name="debug">
+    <div class="m-l-md">
+        {{#if isOnline}}
+            {{#if isProcessing}}
+                {{spinner processing}}
+            {{else}}
+                <button class="btn btn-danger js-disconnect">Go Offline</button>
+            {{/if}}
+        {{/if}}
+    </div>
+    <div class="m-t">
+        <button class="js-electron">electron</button>
+    </div>
+</template>

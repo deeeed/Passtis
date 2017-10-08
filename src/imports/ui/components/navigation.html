@@ -1,15 +1,23 @@
 <template name="navigation">
     <div id="menu-header" class="text-center">
-        <img src="/passtis-icon.png"/>
+        <img src="/passtis-icon.png" class="js-cordova-version"/>
         <h1 class="text-white">Passtis</h1>
+        <div class="">
+            {{version}}
+        </div>
     </div>
     <hr/>
     <ul class="nav">
         <li class="js-nav-menu {{isActiveRoute name='accounts'}}">
-            <a href="{{pathFor 'accounts'}}"><span class="fa fa-users"> {{mf 'navigation.accounts' 'Accounts'}}</span></a>
+            <a href="{{pathFor 'accounts'}}"><span class=""><i class="fa fa-users">&nbsp;</i> {{mf 'navigation.accounts' 'Accounts'}}</span></a>
         </li>
+        {{#if isDebug}}
+            <li class="js-nav-menu {{isActiveRoute name='debug'}}">
+                <a href="{{pathFor 'debug'}}"><span class=""><i class="fa fa-gears">&nbsp;</i> {{mf 'navigation.debug' 'Debug'}}</span></a>
+            </li>
+        {{/if}}
         <li class="js-nav-menu {{isActiveRoute name='settings'}}">
-            <a href="{{pathFor 'settings'}}"><span class="fa fa-diamond"> {{mf 'navigation.settings' 'Settings'}}</span></a>
+            <a href="{{pathFor 'settings'}}"><span class=""><i class="fa fa-diamond">&nbsp;</i> {{mf 'navigation.settings' 'Settings'}}</span></a>
         </li>
         <li class="nav-logout">
             <a href="#" class="js-logout">

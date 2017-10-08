@@ -11,8 +11,8 @@ import '../components/navigation.js';
 import '../components/top_navbar.js';
 import '../components/language_selection.js';
 
-import SyncManager from '/imports/api/client/SyncManager.js';
-import ClientScope from '/imports/api/client/ClientScope.js';
+import {syncManager} from "../../api/client/SyncManager";
+import {ClientScope} from "../../api/client/ClientScope";
 
 const SLIDEOUT_THRESHOLD_SIZE = 768;
 
@@ -52,7 +52,7 @@ Template.MasterLayout.onRendered(function () {
 
 Template.MasterLayout.helpers({
     syncReady() {
-        return SyncManager.isReady();
+        return syncManager.isReady();
     }
 });
 

@@ -1,16 +1,16 @@
-import { AccountsTemplates } from 'meteor/useraccounts:core';
-import { TAPi18n } from 'meteor/tap:i18n';
-import SyncManager from '../../api/client/SyncManager.js';
-import LocalSession from '../../api/client/LocalSession.js';
+import {AccountsTemplates} from 'meteor/useraccounts:core';
+import {TAPi18n} from 'meteor/tap:i18n';
+import {syncManager} from "../../api/client/SyncManager";
+import {localSession} from "../../api/client/LocalSession";
 
 AccountsTemplates.configure({
     showForgotPasswordLink: true,
     defaultLayout: 'AuthLayout',
     onLogoutHook: () => {
         // Reset synchronization
-        SyncManager.reset();
+        syncManager.reset();
         // Reset encryption key
-        LocalSession.set("enckey",null);
+        localSession.set("enckey", false, true);
     }
 });
 
@@ -19,6 +19,6 @@ AccountsTemplates.configure({
  */
 Accounts.onLogin(() => {
     // start sync manager to allow offline usage
-    SyncManager.start();
+    syncManager.start();
 });
 

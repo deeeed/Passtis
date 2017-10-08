@@ -1,15 +1,16 @@
 import './accounts.html';
 
-import { Meteor } from 'meteor/meteor';
-import { ReactiveVar } from 'meteor/reactive-var';
-import { ReactiveDict } from 'meteor/reactive-dict';
-import { Template } from 'meteor/templating';
+import {Meteor} from 'meteor/meteor';
+import {ReactiveVar} from 'meteor/reactive-var';
+import {ReactiveDict} from 'meteor/reactive-dict';
+import {Template} from 'meteor/templating';
 
 import isMobile from 'meteor/mycode:ismobile';
 
-import LocalSession from '/imports/api/client/LocalSession.js';
-import SyncManager from '/imports/api/client/SyncManager.js';
-import KeyAccounts from '/imports/api/model/KeyAccounts.model.js';
+import {localSession} from "../../../api/client/LocalSession";
+
+import {SyncManager} from "../../../api/client/SyncManager";
+import {KeyAccounts} from "../../../api/model/KeyAccounts.model";
 
 // loading and filterConfig could be placed inside the Template scope
 // and be automatically remove from memory on Template destruction.
@@ -67,7 +68,7 @@ const filterConfig = {
             }
 
             loading.set(true);
-            console.debug("query is ",query);
+            console.debug("query is ", query);
             return query;
         },
         afterSubscribe: function (query) {
@@ -111,15 +112,17 @@ Template.accounts.onCreated(function () {
 
 Template.accounts.onRendered(function () {
     var tpl = this;
-    if ( !(Meteor.isCordova || isMobile.any) ) {
+    if (!(Meteor.isCordova || isMobile.any)) {
         // It feels very strange to have the auto focus on the search box for mobile,
         // which is why it is limited to desktop.
-        tpl.autorun( () => {
-            var focus = LocalSession.get("focus");
+        tpl.autorun(() => {
+            var focus = localSession.get("focus");
             if ("visible" == focus) {
                 var box = tpl.$('#search-box');
                 // Timing issue, needs a delay for rendering to allow focus.
-                setTimeout(()=>{ box.focus().select(); }, 200);
+                setTimeout(() => {
+                    box.focus().select();
+                }, 200);
             }
         });
     }
@@ -129,7 +132,7 @@ Template.accounts.helpers({
     loading: function () {
         return loading.get();
     },
-    isActive: function(filter) {
+    isActive: function (filter) {
         return Filter.filter.isActive(filter, "false", "$ne");
     },
     isActiveFilter: function (filter) {
@@ -173,7 +176,7 @@ Template.accounts.events({
             Filter.filter.set(field, filter, true);
         }
     },
-    'click .js-submit': (evt,tpl) => {
+    'click .js-submit': (evt, tpl) => {
         evt.preventDefault();
         // Trick to put the submit button outside autoform and use a flexbox layout.
         tpl.find("#editAccountForm").submit();

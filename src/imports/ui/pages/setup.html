@@ -31,8 +31,14 @@
                             {{else}}
                                 {{#autoForm schema=schema id="setupPassphraseForm" template='bootstrap3' type="normal" validation="blur"}}
                                     <fieldset>
-                                        {{> afQuickField name='passphrase'}}
-                                        {{> afQuickField name='passphraseConfirmation'}}
+                                        {{#unless currentUser.config.passphrase}}
+                                            {{> afQuickField name='passphrase'}}
+                                            {{> afQuickField name='passphraseConfirmation'}}
+                                        {{/unless}}
+                                        {{#unless currentUser.config.pincode}}
+                                            {{> afQuickField name='pincode'}}
+                                            {{> afQuickField name='pincodeConfirmation'}}
+                                        {{/unless}}
                                     </fieldset>
                                     <button type="submit" class="btn btn-success">{{mf 'setup.submit' 'Setup'}}</button>
                                 {{/autoForm}}

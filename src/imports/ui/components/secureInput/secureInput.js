@@ -4,7 +4,7 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
 import {AutoForm} from 'meteor/aldeed:autoform';
 
-import RandomPassword from '/imports/api/RandomPassword.js';
+import {RandomPassword} from "../../../api/RandomPassword";
 import './secureInput.html';
 
 /**

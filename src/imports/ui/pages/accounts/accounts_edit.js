@@ -5,11 +5,11 @@ import {Template} from 'meteor/templating';
 import {ReactiveVar} from 'meteor/reactive-var';
 import {ReactiveDict} from 'meteor/reactive-dict';
 
-import LocalSession from '/imports/api/client/LocalSession.js';
-import AccountForm from '/imports/ui/forms/AccountForms.js';
-import KeyAccounts from '/imports/api/model/KeyAccounts.model.js';
+import {localSession} from "../../../api/client/LocalSession";
+import {AccountForm} from "../../forms/AccountForms";
+import {KeyAccounts} from "../../../api/model/KeyAccounts.model";
 import './accounts_edit.html';
-import '/imports/ui/components/secureInput/secureInput.js';
+import '../../components/secureInput/secureInput';
 
 // Should the ReactiveVar be linked to the template?
 // The problem if on template, they would not be available within the autoform hook.
@@ -25,14 +25,13 @@ Template.account_edit.onCreated(function () {
         // data are available.
 
         let data = Template.currentData() || {};
-        console.debug("data is ", data);
 
         //TODO should use a data encryption/decryption manager class to make sure to always keep the same format.
         var secure = data.secure;
         if (!secure)
             return;
 
-        const enckey = LocalSession.get("enckey");
+        const enckey = localSession.get("enckey");
         if (enckey == null) {
             processing.set(mf("accounts_edit.waiting", "Waiting for encryption key"));
             return;
@@ -91,7 +90,7 @@ AutoForm.addHooks("editAccountForm", {
         // console.debug("Setting up account submit", insertDoc, updateDoc, self);
         processing.set(mf("accounts_edit.encrypting", "Encrypting account data..."));
 
-        const enckey = LocalSession.get("enckey");
+        const enckey = localSession.get("enckey");
 
         // Users should be going through _.compact
         // Otherwise autoform sometime has blank values in the middle of the array

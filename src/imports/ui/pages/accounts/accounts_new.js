@@ -5,9 +5,10 @@ import {Template} from 'meteor/templating';
 import {ReactiveVar} from 'meteor/reactive-var';
 import {ReactiveDict} from 'meteor/reactive-dict';
 
-import KeyAccounts from '/imports/api/model/KeyAccounts.model.js';
-import LocalSession from '/imports/api/client/LocalSession.js';
-import AccountForm from '/imports/ui/forms/AccountForms.js';
+import {KeyAccounts} from "../../../api/model/KeyAccounts.model";
+import {localSession} from "../../../api/client/LocalSession";
+import {AccountForm} from "../../forms/AccountForms";
+
 import '/imports/ui/components/secureInput/secureInput.js';
 import './accounts_new.html';
 
@@ -49,7 +50,7 @@ AutoForm.addHooks("newAccountForm", {
         // console.debug("Setting up account submit", insertDoc, self);
         processing.set(mf("accounts_new.encrypting", "Encrypting account data..."));
 
-        const enckey = LocalSession.get("enckey");
+        const enckey = localSession.get("enckey");
 
         // Users should be going through _.compact
         // Otherwise autoform sometime has blank values in the middle of the array

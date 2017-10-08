@@ -8,8 +8,10 @@ import {ReactiveVar} from 'meteor/reactive-var';
 import {ReactiveDict} from 'meteor/reactive-dict';
 
 import bootbox from 'bootbox';
-import KeyAccounts from '/imports/api/model/KeyAccounts.model.js';
-import LocalSession from '/imports/api/client/LocalSession.js';
+
+import {KeyAccounts} from "../../../api/model/KeyAccounts.model";
+import {localSession} from "../../../api/client/LocalSession";
+
 import './accounts_view.html';
 import './userview'
 
@@ -58,7 +60,7 @@ Template.account_view.onRendered(function () {
         if (!data.secure)
             return;
 
-        const enckey = LocalSession.get("enckey");
+        const enckey = localSession.get("enckey");
         if (enckey == null) {
             self.processing.set("Waiting for encryption key");
             return;

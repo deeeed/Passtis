@@ -1,4 +1,4 @@
-const UserAccount = new SimpleSchema({
+export const UserAccount = new SimpleSchema({
     login: {
         type: String,
         optional: true,
@@ -18,7 +18,7 @@ const UserAccount = new SimpleSchema({
     }
 });
 
-const AccountForm = new SimpleSchema({
+export const AccountForm = new SimpleSchema({
     name: {
         type: String,
         label: mf("AccountForm.name", "Name"),
@@ -43,5 +43,3 @@ const AccountForm = new SimpleSchema({
         optional: true
     }
 });
-
-export default AccountForm;

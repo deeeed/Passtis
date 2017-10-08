@@ -2,10 +2,10 @@
 client-only class used to manage offline collection synchronization.
  */
 
-import { Meteor } from 'meteor/meteor';
-import { ReactiveVar } from 'meteor/reactive-var';
+import {Meteor} from 'meteor/meteor';
+import {ReactiveVar} from 'meteor/reactive-var';
 
-import KeyAccounts from '../model/KeyAccounts.model.js';
+import {KeyAccounts} from "../model/KeyAccounts.model";
 
 /**
  * Synchronization Manager class
@@ -34,7 +34,7 @@ class SyncManager {
     }
 
     start() {
-        if(this.started) {
+        if (this.started) {
             console.error("[SyncManager] already started");
             return;
         }
@@ -42,16 +42,20 @@ class SyncManager {
         this.started = true;
 
         // Begin global subscriptions, keep everything in cache.
-        this.sub_accounts = Meteor.subscribe("accounts.private", () => {
-            // Caching all subscriptions data.
-            const cursor = KeyAccounts.find();
-            this.offlineKeyAccounts.keep(cursor);
-        });
         this.sub_users = Meteor.subscribe("userData", () => {
             // Caching all subscription data.
             const cursor = Meteor.users.find();
             this.offlineUser.keep(cursor);
+
+            // Load accounts after user data has loaded.
+            this.sub_accounts = Meteor.subscribe("accounts.private", () => {
+                // Caching all subscriptions data.
+                const cursor = KeyAccounts.find();
+                this.offlineKeyAccounts.keep(cursor);
+            });
+
         });
+
 
         /**
          * Uses ground:db event to detect when the database is available instead of just subscription ready.
@@ -59,7 +63,7 @@ class SyncManager {
          */
         this.offlineKeyAccounts.on("loaded", () => {
             const cursor = this.offlineKeyAccounts.find();
-            console.info("KeyAccounts collection grounded to/from browser cache.",cursor.count());
+            console.info("KeyAccounts collection grounded to/from browser cache.", cursor.count());
             this.keyAccountsReady.set(true);
             // Overwrite collection finds using the grounded data
             KeyAccounts.find = (...args) => {
@@ -90,10 +94,10 @@ class SyncManager {
      * - Stop all subscriptions
      * - Cleanup ground:db cache
      * - reset started flag
-     * 
+     *
      */
     reset() {
-        if(!this.started)
+        if (!this.started)
             return;
 
         // Stop subscriptions
@@ -118,18 +122,17 @@ class SyncManager {
         const user = Meteor.user() || {};
         const config = user.config || null;
         //FIXME temporarily disable, possible bug here
-        const offlineReady = this.offlineKeyAccounts.find().count()>0 && config!=null;
+        const offlineReady = this.offlineKeyAccounts.find().count() > 0 && config != null;
         // const offlineReady = false;
-        const onlineReady =this.userDataReady.get() && this.keyAccountsReady.get()
+        // const onlineReady = this.userDataReady.get() && this.keyAccountsReady.get()
+        const onlineReady = this.userDataReady.get();
         return offlineReady || onlineReady;
     };
 }
 
 // Only export one instance of the manager
-const manager = new SyncManager();
-if(Meteor.isDevelopment) {
-    window.manager = manager;
+export const syncManager = new SyncManager();
+if (Meteor.isDevelopment) {
+    window.syncManager = syncManager;
 }
 
-
-export default manager;

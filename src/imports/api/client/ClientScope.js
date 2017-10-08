@@ -1,5 +1,5 @@
 // Global scope to share data between client pages.
-const ClientScope = {
+export const ClientScope = {
     slideout: null // slideout menu
 };
 
@@ -7,5 +7,3 @@ const ClientScope = {
 if(Meteor.isDevelopment) {
     window.scope = ClientScope;
 }
-
-export default ClientScope;

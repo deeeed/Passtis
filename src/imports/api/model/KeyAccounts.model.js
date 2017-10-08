@@ -5,7 +5,7 @@ import { Meteor } from 'meteor/meteor';
  * with the Metoer Accounts classes.
  *
  */
-const KeyAccounts = new Meteor.Collection("accounts");
+export const KeyAccounts = new Meteor.Collection("accounts");
 
 let AccountSchema = {};
 
@@ -71,5 +71,3 @@ KeyAccounts.attachSchema(AccountSchema.Account, {replace: true});
 if (Meteor.isDevelopment && Meteor.isClient) {
     window.KeyAccounts = KeyAccounts;
 }
-
-export default KeyAccounts;
