@@ -120,10 +120,13 @@ function createMainWindow() {
         }
     })
 
+    let devUrl = 'http://localhost:3005';
+    // devUrl = 'https://app.passtis.pw';
     const url = isDevelopment
-        ? `http://localhost:3005`
+        ? devUrl
         : `https://app.passtis.pw`
 
+    console.log(`Loading url ${url}`);
     if (isDevelopment) {
         window.webContents.openDevTools()
     }

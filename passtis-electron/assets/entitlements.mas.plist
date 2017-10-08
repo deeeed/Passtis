@@ -4,14 +4,15 @@
 <dict>
 <key>com.apple.security.app-sandbox</key>
 <true/>
+<key>com.apple.security.network.client</key>
+<true/>
+<key>com.apple.security.network.server</key>
+<true/>
 <key>com.apple.security.application-groups</key>
-<array>
-    <string>B2XV98NBVY.net.siteed.PasstisMac</string>
-</array>
+<string>B2XV98NBVY.net.siteed.PasstisMac</string>
 <key>com.apple.security.files.user-selected.read-only</key>
 <true/>
 <key>com.apple.security.files.user-selected.read-write</key>
 <true/>
 </dict>
 </plist>
-
