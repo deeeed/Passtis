@@ -21,3 +21,4 @@
 /build/
 /passtis-electron/dist/
 /passtis-electron/embedded.provisionprofile
+/passtis-electron/node_modules/

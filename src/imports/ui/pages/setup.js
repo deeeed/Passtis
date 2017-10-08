@@ -8,7 +8,7 @@ import {Template} from 'meteor/templating';
 import {modalReposition} from '../helpers.js';
 
 import {syncManager} from '../../api/client/SyncManager.js';
-import SetupForm from '../forms/SetupForms.js';
+import {SetupForm} from "../forms/SetupForms";
 import {localSession} from '../../api/client/LocalSession.js';
 import './setup.html';
 
@@ -106,8 +106,6 @@ Template.setup.onCreated(function () {
                 }
 
                 self.processing.set(mf("setup.saving", "Saving passphrase..."));
-
-                console.debug("updating with ", $set);
 
                 Meteor.users.update({_id: Meteor.userId()}, {$set: $set}, function (err, res) {
                     console.debug("update result", err, res);
