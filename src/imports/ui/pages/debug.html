@@ -11,4 +11,36 @@
     <div class="m-t">
         <button class="js-electron">electron</button>
     </div>
+    <div>
+        <div class="divider-text">
+            RSA KEY GENERATION
+        </div>
+        {{#if processing}}
+            <div>Processing new key....</div>
+        {{else}}
+            <div>
+                <button class="js-generate btn btn-success">Generate New KEY</button>
+            </div>
+            <div>
+                <label>Private Key
+                    <textarea>{{stringify RSAPrivateKey}}</textarea>
+                </label>
+            </div>
+            <div>
+                <label>Public Key
+                    <textarea>{{stringify RSAPublicKey}}</textarea>
+                </label>
+            </div>
+        {{/if}}
+        <div>
+            Master Password: <input type="text"  value="AsECurep@assword"/>
+        </div>
+        <div>
+            Secret Key: <input type="text" value="SECRETKEY"/>
+        </div>
+        <div>
+            Seed: <input type="text" value="SEED"/>
+        </div>
+    </div>
+
 </template>
