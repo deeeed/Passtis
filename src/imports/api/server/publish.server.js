@@ -5,7 +5,7 @@ import {logger as log} from "../../util/loggers";
 Meteor.publish("accounts.private", function () {
     var cursor = KeyAccounts.find({owner: this.userId});
     var count = cursor.count();
-    log.info("Publishing cursor for " + this.userId + " -> " + count);
+    log.info("[accounts.private] publish " + this.userId + " -> " + count);
     return cursor;
 });
 
